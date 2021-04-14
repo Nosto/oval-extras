@@ -10,6 +10,8 @@
 
 package com.nosto.ovalextras.constraint;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.junit.Test;
 
 import javax.annotation.Nullable;
@@ -21,7 +23,8 @@ import static org.junit.Assert.assertTrue;
 public class VatIdCheckTest {
     private static final String NO_VAT = null;
     private static final String INVALID_VAT = "123";
-    private static final String VALID_FINNISH_VAT_CODE = "2418911-9";
+    //ToDo double check if this should be public
+    private static final String VALID_FINNISH_VAT_CODE = "24189119";
 
     private VatId vatAnnotation = new VatId() {
         @Nullable
@@ -38,6 +41,16 @@ public class VatIdCheckTest {
         @Override
         public String ignoreValidationField() {
             return "";
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            return EqualsBuilder.reflectionEquals(this, o);
+        }
+
+        @Override
+        public int hashCode() {
+            return HashCodeBuilder.reflectionHashCode(this);
         }
     };
     
@@ -56,6 +69,16 @@ public class VatIdCheckTest {
         @Override
         public String ignoreValidationField() {
             return "ignoreValidation";
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            return EqualsBuilder.reflectionEquals(this, o);
+        }
+
+        @Override
+        public int hashCode() {
+            return HashCodeBuilder.reflectionHashCode(this);
         }
     };
 
