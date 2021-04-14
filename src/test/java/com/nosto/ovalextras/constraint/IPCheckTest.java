@@ -9,11 +9,13 @@
  ******************************************************************************/
 package com.nosto.ovalextras.constraint;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Tests to check that the validation class for Play that validates the 
@@ -21,7 +23,7 @@ import java.util.Set;
  *
  * @author mridang
  */
-public class IPCheckTest extends Assert {
+public class IPCheckTest {
 
     /**
      * Simple test to check that the the checker handles null values

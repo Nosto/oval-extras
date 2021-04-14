@@ -12,7 +12,6 @@ package com.nosto.ovalextras.constraint;
 import net.sf.oval.Validator;
 import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
 import net.sf.oval.localization.message.ResourceBundleMessageResolver;
-import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ErrorCollector;
@@ -27,7 +26,7 @@ import java.util.stream.Collectors;
 
 import static org.hamcrest.Matchers.notNullValue;
 
-public class ValidationMessagesTest extends Assert {
+public class ValidationMessagesTest {
 
     @Rule
     public ErrorCollector errorCollector = new ErrorCollector();

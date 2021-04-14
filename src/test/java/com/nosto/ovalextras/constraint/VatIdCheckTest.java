@@ -10,13 +10,15 @@
 
 package com.nosto.ovalextras.constraint;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import javax.annotation.Nullable;
 import java.lang.annotation.Annotation;
 
-public class VatIdCheckTest extends Assert {
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+public class VatIdCheckTest {
     private static final String NO_VAT = null;
     private static final String INVALID_VAT = "123";
     private static final String VALID_FINNISH_VAT_CODE = "2418911-9";

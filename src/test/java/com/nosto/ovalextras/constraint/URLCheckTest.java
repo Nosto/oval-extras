@@ -9,13 +9,15 @@
  ******************************************************************************/
 package com.nosto.ovalextras.constraint;
 
-import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author oskar
  */
-public class URLCheckTest extends Assert {
+public class URLCheckTest {
 
     @Test
     public void isSatisfied() {
