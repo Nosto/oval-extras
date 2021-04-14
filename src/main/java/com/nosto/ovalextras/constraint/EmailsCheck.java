@@ -9,7 +9,6 @@
  ******************************************************************************/
 package com.nosto.ovalextras.constraint;
 
-import com.nosto.ovalextras.utils.EmailUtils;
 import net.sf.oval.Validator;
 import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
 import net.sf.oval.context.OValContext;
@@ -17,9 +16,12 @@ import net.sf.oval.exception.OValException;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nullable;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Set;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * Custom validation class for Play that validates the list of reportee email
@@ -45,7 +47,7 @@ public class EmailsCheck extends AbstractAnnotationCheck<Emails> {
         }
 
         if (value instanceof String) {
-            Set<String> splitEmails = EmailUtils.splitByNewLine((String) value);
+            Set<String> splitEmails = splitByNewLine((String) value);
             return checkEmails(splitEmails);
         } else if (value instanceof Collection) {
             return checkEmails((Collection) value);
@@ -61,5 +63,13 @@ public class EmailsCheck extends AbstractAnnotationCheck<Emails> {
             }
         }
         return true;
+    }
+
+    private static Set<String> splitByNewLine(@Nullable String emails) {
+        if (StringUtils.isBlank(emails)) {
+            return Collections.emptySet();
+        }
+
+        return Arrays.stream(emails.split("\n")).map(String::trim).filter(StringUtils::isNotBlank).collect(Collectors.toSet());
     }
 }
