@@ -22,7 +22,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'checkstyle'
 apply plugin: "com.github.spotbugs"
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
 apply plugin: 'maven-publish'
 apply plugin: 'com.diffplug.gradle.spotless'
 apply plugin: 'net.ltgt.errorprone'
@@ -40,7 +40,10 @@ java {
     targetCompatibility = JavaVersion.VERSION_1_9
 }
 
+compileJava.options.encoding = 'UTF-8'
+
 tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
     options.errorprone.nullaway {
         //noinspection GrUnresolvedAccess
         severity = CheckSeverity.OFF

@@ -45,7 +45,7 @@ public class ValidationMessagesTest {
 
         annotations.forEach(aClass -> {
             try {
-                String key = aClass.newInstance().getMessage();
+                String key = aClass.getDeclaredConstructor().newInstance().getMessage();
                 String message = resolver.getMessage(key);
                 errorCollector.checkThat("No localisation for " + key, message, notNullValue());
             } catch (Exception e) {

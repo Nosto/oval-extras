@@ -30,6 +30,9 @@ public class IPCheck extends AbstractAnnotationCheck<IP> {
     /**
      * Checks the all the addresses are valid IP addresses. It iterates over
      * each item in the set in uses the Google Commons validator to check them
+     * @param object object
+     * @param value value
+     * @return boolean
      */
     @SuppressWarnings({"UnstableApiUsage", "unchecked"})
     public boolean isSatisfied(@Nullable Object object, @Nullable Object value) {
