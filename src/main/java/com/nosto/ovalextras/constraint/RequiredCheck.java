@@ -9,9 +9,8 @@
  ******************************************************************************/
 package com.nosto.ovalextras.constraint;
 
-import net.sf.oval.Validator;
+import net.sf.oval.ValidationCycle;
 import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
-import net.sf.oval.context.OValContext;
 
 import java.util.Collection;
 
@@ -19,7 +18,7 @@ import java.util.Collection;
 public class RequiredCheck extends AbstractAnnotationCheck<Required> {
 
     @Override
-    public boolean isSatisfied(Object validatedObject, Object value, OValContext context, Validator validator) {
+    public boolean isSatisfied(final Object validatedObject, final Object value, final ValidationCycle cycle) {
         if (value == null) {
             return false;
         }

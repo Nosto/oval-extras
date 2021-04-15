@@ -10,9 +10,8 @@
 package com.nosto.ovalextras.constraint;
 
 import com.nosto.ovalextras.utils.URIUtil;
-import net.sf.oval.Validator;
+import net.sf.oval.ValidationCycle;
 import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
-import net.sf.oval.context.OValContext;
 import net.sf.oval.exception.OValException;
 import org.apache.commons.lang3.StringUtils;
 
@@ -34,7 +33,7 @@ public class DomainCheck extends AbstractAnnotationCheck<Domain> {
     }
 
     @Override
-    public boolean isSatisfied(Object object, Object value, OValContext context, Validator validator) throws OValException {
+    public boolean isSatisfied(final Object validatedObject, final Object value, final ValidationCycle cycle) throws OValException {
         if (value == null) {
             return true;
         } else {
