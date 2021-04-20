@@ -9,9 +9,8 @@
  ******************************************************************************/
 package com.nosto.ovalextras.constraint;
 
-import net.sf.oval.Validator;
+import net.sf.oval.ValidationCycle;
 import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
-import net.sf.oval.context.OValContext;
 import net.sf.oval.exception.OValException;
 import org.apache.commons.lang3.StringUtils;
 
@@ -38,9 +37,8 @@ public class EmailsCheck extends AbstractAnnotationCheck<Emails> {
         super.configure(url);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    public boolean isSatisfied(@Nullable Object object, @Nullable Object value, @Nullable OValContext context, @Nullable Validator validator)
+    public boolean isSatisfied(@Nullable final Object object, @Nullable final Object value,  @Nullable final ValidationCycle validator)
             throws OValException {
         if (value == null) {
             return true;

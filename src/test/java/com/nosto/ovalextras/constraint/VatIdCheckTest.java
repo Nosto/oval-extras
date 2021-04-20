@@ -26,7 +26,7 @@ public class VatIdCheckTest {
     //ToDo double check if this should be public
     private static final String VALID_FINNISH_VAT_CODE = "24189119";
 
-    private VatId vatAnnotation = new VatId() {
+    private final VatId vatAnnotation = new VatId() {
         @Nullable
         @Override
         public Class<? extends Annotation> annotationType() {
@@ -54,7 +54,7 @@ public class VatIdCheckTest {
         }
     };
     
-    private VatId vatAnnotationIgnoreValidation = new VatId() {
+    private final VatId vatAnnotationIgnoreValidation = new VatId() {
         @Nullable
         @Override
         public Class<? extends Annotation> annotationType() {
@@ -111,9 +111,9 @@ public class VatIdCheckTest {
 
     private static class TestEntity {
         @SuppressWarnings("unused")
-        private String countryCode;
+        private final String countryCode;
         @SuppressWarnings("unused")
-        private boolean ignoreValidation;
+        private final boolean ignoreValidation;
 
         private TestEntity(String countryCode, boolean ignoreValidation) {
             this.countryCode = countryCode;

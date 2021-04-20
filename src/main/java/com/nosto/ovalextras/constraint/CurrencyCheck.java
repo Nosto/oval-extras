@@ -24,7 +24,7 @@ public class CurrencyCheck extends AbstractAnnotationCheck<Currency> {
 
     public static boolean isValidCurrency(Object value) {
         try {
-            getCurrency(value.toString());
+            java.util.Currency.getInstance(value.toString().trim().toUpperCase());
             return true;
         } catch (IllegalArgumentException e) {
             return false;
@@ -40,7 +40,4 @@ public class CurrencyCheck extends AbstractAnnotationCheck<Currency> {
         }
     }
 
-    private static java.util.Currency getCurrency(String code) {
-        return java.util.Currency.getInstance(code.trim().toUpperCase());
-    }
 }

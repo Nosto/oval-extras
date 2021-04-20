@@ -41,7 +41,7 @@ public class IPCheckTest {
     @Test
     public void testInvalidAddresses() {
         IPCheck addressChecker = new IPCheck();
-        Set<String> ignoredAddresses = new HashSet<String>();
+        Set<String> ignoredAddresses = new HashSet<>();
         ignoredAddresses.add("0.0.0.0");
         assertTrue(addressChecker.isSatisfied(null, ignoredAddresses));
         ignoredAddresses.add("127.0.0.1");

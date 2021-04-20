@@ -19,7 +19,7 @@ import java.util.Collection;
 
 public class DomainCheck extends AbstractAnnotationCheck<Domain> {
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", ""})
     private static boolean isValidDomain(Object value) {
         if (value instanceof String) {
             String subDomain = (String) value;

@@ -10,9 +10,8 @@
 package com.nosto.ovalextras.constraint;
 
 import com.google.common.net.InetAddresses;
-import net.sf.oval.Validator;
+import net.sf.oval.ValidationCycle;
 import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
-import net.sf.oval.context.OValContext;
 import net.sf.oval.exception.OValException;
 
 import javax.annotation.Nullable;
@@ -34,7 +33,7 @@ public class IPCheck extends AbstractAnnotationCheck<IP> {
      * @param value value
      * @return boolean
      */
-    @SuppressWarnings({"UnstableApiUsage", "unchecked"})
+    @SuppressWarnings({"UnstableApiUsage", "unchecked", "IfStatementWithIdenticalBranches"})
     public boolean isSatisfied(@Nullable Object object, @Nullable Object value) {
         if (value == null) {
             return true;
@@ -50,7 +49,7 @@ public class IPCheck extends AbstractAnnotationCheck<IP> {
     }
 
     @Override
-    public boolean isSatisfied(Object object, Object value, OValContext context, Validator validator) throws OValException {
-        return isSatisfied(object, value);
+    public boolean isSatisfied(final Object validatedObject, final Object value, final ValidationCycle cycle) throws OValException {
+        return isSatisfied(validatedObject, value);
     }
 }

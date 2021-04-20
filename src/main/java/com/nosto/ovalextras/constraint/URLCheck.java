@@ -10,9 +10,9 @@
 package com.nosto.ovalextras.constraint;
 
 import com.nosto.ovalextras.utils.URLUtils;
+import net.sf.oval.ValidationCycle;
 import net.sf.oval.Validator;
 import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
-import net.sf.oval.context.OValContext;
 import net.sf.oval.exception.OValException;
 import org.apache.commons.lang3.StringUtils;
 
@@ -20,14 +20,17 @@ import javax.annotation.Nullable;
 
 public class URLCheck extends AbstractAnnotationCheck<URL> {
 
-    @Override
-    public boolean isSatisfied(@Nullable Object object, Object value, @Nullable OValContext context, @Nullable Validator validator)
-            throws OValException {
+    public boolean isSatisfied(@Nullable Object object, Object value, @Nullable Validator validator) throws OValException {
         String url = (String) value;
         if (StringUtils.isBlank(url)) {
             return true;
         } else {
             return URLUtils.isValid(url);
         }
+    }
+
+    @Override
+    public boolean isSatisfied(final Object validatedObject, final Object value, final ValidationCycle cycle) throws OValException {
+        return isSatisfied(validatedObject, value, cycle);
     }
 }

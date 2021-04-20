@@ -41,7 +41,7 @@ public class EmailAddressesCheckTest {
     @Test
     public void testInvalidAddresses() {
         EmailsCheck addressChecker = new EmailsCheck();
-        Set<String> ignoredAddresses = new HashSet<String>();
+        Set<String> ignoredAddresses = new HashSet<>();
         ignoredAddresses.add("test@example.com");
         assertTrue(addressChecker.isSatisfied(null, ignoredAddresses, null, null));
         ignoredAddresses.add("test+test@example.com");
