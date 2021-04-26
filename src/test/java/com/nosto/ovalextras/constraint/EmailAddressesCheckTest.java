@@ -31,8 +31,8 @@ public class EmailAddressesCheckTest {
     @Test
     public void testEmptyValues() {
         EmailsCheck addressChecker = new EmailsCheck();
-        assertTrue(addressChecker.isSatisfied(null, null, null, null));
-        assertTrue(addressChecker.isSatisfied(null, new HashSet<String>(), null, null));
+        assertTrue(addressChecker.isSatisfied(null, null, null));
+        assertTrue(addressChecker.isSatisfied(null, new HashSet<String>(), null));
     }
 
     /**
@@ -43,10 +43,10 @@ public class EmailAddressesCheckTest {
         EmailsCheck addressChecker = new EmailsCheck();
         Set<String> ignoredAddresses = new HashSet<>();
         ignoredAddresses.add("test@example.com");
-        assertTrue(addressChecker.isSatisfied(null, ignoredAddresses, null, null));
+        assertTrue(addressChecker.isSatisfied(null, ignoredAddresses, null));
         ignoredAddresses.add("test+test@example.com");
-        assertTrue(addressChecker.isSatisfied(null, ignoredAddresses, null, null));
+        assertTrue(addressChecker.isSatisfied(null, ignoredAddresses, null));
         ignoredAddresses.add("test");
-        assertFalse(addressChecker.isSatisfied(null, ignoredAddresses, null, null));
+        assertFalse(addressChecker.isSatisfied(null, ignoredAddresses, null));
     }
 }

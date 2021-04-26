@@ -105,7 +105,7 @@ public class VatIdCheck extends AbstractAnnotationCheck<VatId> {
         private static final String VAT_ID_PREFIX_GREECE = "EL";
 
         @SuppressWarnings({"BooleanMethodIsAlwaysInverted"})
-        public static boolean isEuCountry(@Nullable String country) {
+        public static boolean isEuCountry(String country) {
             if (country == null) {
                 return false;
             }
@@ -120,7 +120,7 @@ public class VatIdCheck extends AbstractAnnotationCheck<VatId> {
             return !isEuCountry(countryCode) || (vat != null && validate(vat, countryCode));
         }
 
-        private static boolean validate(@Nullable String vat, String countryCode) {
+        private static boolean validate(String vat, String countryCode) {
             EUVatCheckResponse resp = EUVatChecker.doCheck(countryCode, vat);
             return resp.isValid();
         }

@@ -14,23 +14,20 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-/**
- * @author oskar
- */
 public class URLCheckTest {
 
     @Test
     public void isSatisfied() {
         URLCheck urlCheck = new URLCheck();
-        assertTrue(urlCheck.isSatisfied(null, "//example.dev", null, null));
-        assertFalse(urlCheck.isSatisfied(null, "//example.test", null, null));
-        assertFalse(urlCheck.isSatisfied(null, "//example.local", null, null));
-        assertFalse(urlCheck.isSatisfied(null, "//example.invalid", null, null));
-        assertFalse(urlCheck.isSatisfied(null, "//example.example", null, null));
-        assertTrue(urlCheck.isSatisfied(null, "//example.shop", null, null));
-        assertFalse(urlCheck.isSatisfied(null, "example.com", null, null));
-        assertTrue(urlCheck.isSatisfied(null, "https://example.com", null, null));
-        assertTrue(urlCheck.isSatisfied(null, "https://example.shop", null, null));
+        assertTrue(urlCheck.isSatisfied(null, "//example.dev", null));
+        assertFalse(urlCheck.isSatisfied(null, "//example.test", null));
+        assertFalse(urlCheck.isSatisfied(null, "//example.local", null));
+        assertFalse(urlCheck.isSatisfied(null, "//example.invalid", null));
+        assertFalse(urlCheck.isSatisfied(null, "//example.example", null));
+        assertTrue(urlCheck.isSatisfied(null, "//example.shop", null));
+        assertFalse(urlCheck.isSatisfied(null, "example.com", null));
+        assertTrue(urlCheck.isSatisfied(null, "https://example.com", null));
+        assertTrue(urlCheck.isSatisfied(null, "https://example.shop", null));
     }
 
 }

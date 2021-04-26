@@ -86,33 +86,33 @@ public class VatIdCheckTest {
     public void testWithNonEuCountry() {
         VatIdCheck vatCheck = new VatIdCheck();
         vatCheck.configure(vatAnnotation);
-        assertTrue(vatCheck.isSatisfied(new TestEntity("US", true), NO_VAT, null, null));
-        assertTrue(vatCheck.isSatisfied(new TestEntity("US", true), INVALID_VAT, null, null));
-        assertTrue(vatCheck.isSatisfied(new TestEntity("US", true), VALID_FINNISH_VAT_CODE, null, null));
+        assertTrue(vatCheck.isSatisfied(new TestEntity("US", true), NO_VAT, null));
+        assertTrue(vatCheck.isSatisfied(new TestEntity("US", true), INVALID_VAT, null));
+        assertTrue(vatCheck.isSatisfied(new TestEntity("US", true), VALID_FINNISH_VAT_CODE, null));
     }
 
     @Test
     public void testWithEuCountry() {
         VatIdCheck vatCheck = new VatIdCheck();
         vatCheck.configure(vatAnnotation);
-        assertFalse(vatCheck.isSatisfied(new TestEntity("FI", true), NO_VAT, null, null));
-        assertFalse(vatCheck.isSatisfied(new TestEntity("FI", true), INVALID_VAT, null, null));
-        assertTrue(vatCheck.isSatisfied(new TestEntity("FI", true), VALID_FINNISH_VAT_CODE, null, null));
+        assertFalse(vatCheck.isSatisfied(new TestEntity("FI", true), NO_VAT, null));
+        assertFalse(vatCheck.isSatisfied(new TestEntity("FI", true), INVALID_VAT, null));
+        assertTrue(vatCheck.isSatisfied(new TestEntity("FI", true), VALID_FINNISH_VAT_CODE,  null));
     }
 
     @Test
     public void testWithEuCountryVatValidationIgnored() {
         VatIdCheck vatCheck = new VatIdCheck();
         vatCheck.configure(vatAnnotationIgnoreValidation);
-        assertTrue(vatCheck.isSatisfied(new TestEntity("FI", true), NO_VAT, null, null));
-        assertTrue(vatCheck.isSatisfied(new TestEntity("FI", true), INVALID_VAT, null, null));
+        assertTrue(vatCheck.isSatisfied(new TestEntity("FI", true), NO_VAT, null));
+        assertTrue(vatCheck.isSatisfied(new TestEntity("FI", true), INVALID_VAT, null));
         assertTrue(vatCheck.isSatisfied(new TestEntity("FI", true), VALID_FINNISH_VAT_CODE, null, null));
     }
 
     private static class TestEntity {
-        @SuppressWarnings("unused")
+        @SuppressWarnings({"unused", "FieldCanBeLocal"})
         private final String countryCode;
-        @SuppressWarnings("unused")
+        @SuppressWarnings({"unused", "FieldCanBeLocal"})
         private final boolean ignoreValidation;
 
         private TestEntity(String countryCode, boolean ignoreValidation) {

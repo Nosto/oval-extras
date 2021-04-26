@@ -5,11 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9da7df8c-411d-4e5d-9177-d5356b029b03" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/beanie.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/beanie.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/beanie.main.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/beanie.test.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/CI.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/CI.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/oval-extras.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/oval-extras.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nosto/ovalextras/constraint/URLCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nosto/ovalextras/constraint/URLCheck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nosto/ovalextras/constraint/VatIdCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nosto/ovalextras/constraint/VatIdCheck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/nosto/ovalextras/constraint/EmailAddressesCheckTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/nosto/ovalextras/constraint/EmailAddressesCheckTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/nosto/ovalextras/constraint/URLCheckTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/nosto/ovalextras/constraint/URLCheckTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/nosto/ovalextras/constraint/VatIdCheckTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/nosto/ovalextras/constraint/VatIdCheckTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,6 +98,9 @@
       <scope name="Inspection" />
     </order>
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="2" />
+  </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
   </component>
@@ -144,7 +150,7 @@
       <recent name="com.nosto.ovalextras" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.oval-extras [build]">
+  <component name="RunManager" selected="Gradle.VatIdCheckTest.testWithEuCountryVatValidationIgnored">
     <configuration default="true" type="lua.app" factoryName="Lua Application">
       <option name="program" value="lua" />
       <option name="file" value="" />
@@ -155,15 +161,13 @@
       <option name="showConsole" value="true" />
       <method v="2" />
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -189,44 +193,44 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="oval-extras [assemble]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="VatIdCheckTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="--tests &quot;com.nosto.ovalextras.constraint.VatIdCheckTest&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value="assemble" />
+            <option value=":test" />
           </list>
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="oval-extras [buildDependents]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="VatIdCheckTest.testWithEuCountryVatValidationIgnored" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="--tests &quot;com.nosto.ovalextras.constraint.VatIdCheckTest.testWithEuCountryVatValidationIgnored&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value="buildDependents" />
+            <option value=":test" />
           </list>
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
@@ -274,19 +278,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Gradle.Tests in 'com.nosto.ovalextras.constraint'" />
-      <item itemvalue="Gradle.oval-extras [assemble]" />
       <item itemvalue="Gradle.oval-extras [build]" />
-      <item itemvalue="Gradle.oval-extras [buildDependents]" />
       <item itemvalue="Gradle.oval-extras [clean]" />
       <item itemvalue="Gradle.ValidationMessagesTest.testMessageHandling" />
+      <item itemvalue="Gradle.VatIdCheckTest" />
+      <item itemvalue="Gradle.Tests in 'com.nosto.ovalextras.constraint'" />
+      <item itemvalue="Gradle.VatIdCheckTest.testWithEuCountryVatValidationIgnored" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.VatIdCheckTest.testWithEuCountryVatValidationIgnored" />
+        <item itemvalue="Gradle.VatIdCheckTest" />
         <item itemvalue="Gradle.oval-extras [build]" />
         <item itemvalue="Gradle.oval-extras [clean]" />
-        <item itemvalue="Gradle.ValidationMessagesTest.testMessageHandling" />
-        <item itemvalue="Gradle.ValidationMessagesTest.testMessageHandling" />
         <item itemvalue="Gradle.ValidationMessagesTest.testMessageHandling" />
       </list>
     </recent_temporary>
@@ -317,7 +321,10 @@
       <workItem from="1618318138823" duration="14367000" />
       <workItem from="1618415270343" duration="4522000" />
       <workItem from="1618496582811" duration="247000" />
-      <workItem from="1618814844694" duration="2018000" />
+      <workItem from="1618814844694" duration="2356000" />
+      <workItem from="1618901535170" duration="1829000" />
+      <workItem from="1618907863718" duration="1454000" />
+      <workItem from="1619434641896" duration="1478000" />
     </task>
     <servers />
   </component>
