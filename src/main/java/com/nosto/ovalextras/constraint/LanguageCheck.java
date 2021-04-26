@@ -23,8 +23,6 @@ import java.util.Locale;
  */
 public class LanguageCheck extends AbstractAnnotationCheck<Language> {
 
-    public static final String INVALID_LANGUAGE_CODE = "Language code is invalid. Use ISO 639 two letter codes such as 'us' or 'fr'";
-    public static final String MESSAGE = "global.merchant.language.invalid";
     private static final ImmutableList<String> LANGUAGES = ImmutableList.copyOf(Locale.getISOLanguages());
 
     public static boolean isValid(String value) {
