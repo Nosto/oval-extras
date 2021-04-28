@@ -1,5 +1,4 @@
 //file:noinspection GrUnresolvedAccess
-//file:noinspection GroovyAssignabilityCheck
 import net.ltgt.gradle.errorprone.*
 
 buildscript {
@@ -198,11 +197,15 @@ publishing {
         }
     }
     publications {
+        //noinspection GroovyAssignabilityCheck
         mavenJava(MavenPublication) {
             versionMapping {
+                //noinspection GroovyAssignabilityCheck
                 usage('java-api') {
+                    //noinspection GroovyAssignabilityCheck
                     fromResolutionOf('runtimeClasspath')
                 }
+                //noinspection GroovyAssignabilityCheck
                 usage('java-runtime') {
                     fromResolutionResult()
                 }
@@ -210,30 +213,26 @@ publishing {
             from components.java
 
             pom {
+                //noinspection GroovyAssignabilityCheck
                 name = 'Oval Extras'
+                //noinspection GroovyAssignabilityCheck
                 description = 'A simple library to sanity-check your bean ser-deser'
+                //noinspection GroovyAssignabilityCheck
                 url = 'https://github.com/nosto/oval-extras'
                 licenses {
                     license {
+                        //noinspection GroovyAssignabilityCheck
                         name = 'The Apache License, Version 2.0'
+                        //noinspection GroovyAssignabilityCheck
                         url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
                     }
                 }
-                developers {
-                    developer {
-                        id = 'ollik1'
-                        name = 'Olli Kuonanoja'
-                        email = 'olli@nosto.com'
-                    }
-                    developer {
-                        id = 'mridang'
-                        name = 'Mridang Agarwalla'
-                        email = 'mridang@nosto.com'
-                    }
-                }
                 scm {
+                    //noinspection GroovyAssignabilityCheck
                     connection = 'scm:git:git://github.com/nosto/oval-extras.git'
+                    //noinspection GroovyAssignabilityCheck
                     developerConnection = 'scm:git:ssh://github.com/nosto/oval-extras.git'
+                    //noinspection GroovyAssignabilityCheck
                     url = 'https://github.com/nosto/oval-extras'
                 }
             }

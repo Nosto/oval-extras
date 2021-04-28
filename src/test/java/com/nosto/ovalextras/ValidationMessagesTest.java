@@ -7,8 +7,9 @@
  *  accordance with the terms of the agreement you entered into with
  *  Nosto Solutions Ltd.
  */
-package com.nosto.ovalextras.constraint;
+package com.nosto.ovalextras;
 
+import net.sf.oval.AbstractCheck;
 import net.sf.oval.Validator;
 import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
 import net.sf.oval.localization.message.ResourceBundleMessageResolver;
@@ -36,11 +37,11 @@ public class ValidationMessagesTest {
     @Test
     public void testMessageHandling() {
 
-        ResourceBundleMessageResolver resolver = (ResourceBundleMessageResolver) Validator.getMessageResolver();
-        resolver.addMessageBundle(ResourceBundle.getBundle("com.nosto.ovalextras/Messages", Locale.ENGLISH));
+        final ResourceBundleMessageResolver resolver = (ResourceBundleMessageResolver) Validator.getMessageResolver();
+        resolver.addMessageBundle(ResourceBundle.getBundle("com/nosto/ovalextras/MessagesResolverTest", new Locale("en")));
 
         Reflections reflections = new Reflections(new ConfigurationBuilder().setUrls(ClasspathHelper.forPackage("com.nosto")));
-        Set<Class<? extends AbstractAnnotationCheck>> annotations = reflections.getSubTypesOf(AbstractAnnotationCheck.class)
+        Set<Class<? extends AbstractCheck>> annotations = reflections.getSubTypesOf(AbstractAnnotationCheck.class)
                 .stream()
                 .filter(c -> !Modifier.isAbstract(c.getModifiers()))
                 .collect(Collectors.toSet());
