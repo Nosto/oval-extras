@@ -17,11 +17,13 @@ import java.util.Currency;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class CurrencyCheckTest {
+public class CurrencyCheckTest extends AbstractContraintsTest {
 
     @Test
     public void testValidCurrencies() {
         CurrencyCheck currencyCheck = new CurrencyCheck();
+        super.testCheck(currencyCheck);
+
         assertTrue(currencyCheck.isSatisfied(null, Currency.getInstance("ALL").getCurrencyCode(), null));
         assertTrue(currencyCheck.isSatisfied(null, Currency.getInstance("EUR").getCurrencyCode(), null));
         assertTrue(currencyCheck.isSatisfied(null, Currency.getInstance("USD").getCurrencyCode(), null));
@@ -31,6 +33,8 @@ public class CurrencyCheckTest {
     @Test
     public void testInvalidCurrencies() {
         CurrencyCheck currencyCheck = new CurrencyCheck();
+        super.testCheck(currencyCheck);
+
         assertFalse(currencyCheck.isSatisfied(null, "euro", null));
         assertFalse(currencyCheck.isSatisfied(null, "dollar", null));
         assertFalse(currencyCheck.isSatisfied(null, "$", null));

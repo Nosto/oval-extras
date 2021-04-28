@@ -15,11 +15,13 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class DomainCheckTest {
+public class DomainCheckTest extends AbstractContraintsTest {
 
     @Test
     public void testValidDomain() {
         DomainCheck domainCheck = new DomainCheck();
+        super.testCheck(domainCheck);
+
         assertTrue(domainCheck.isSatisfied(null, "domain.com", null));
         assertTrue(domainCheck.isSatisfied(null, "domain.com/", null));
     }
@@ -27,6 +29,8 @@ public class DomainCheckTest {
     @Test
     public void testInvalidDomain() {
         DomainCheck domainCheck = new DomainCheck();
+        super.testCheck(domainCheck);
+
         assertFalse(domainCheck.isSatisfied(null, "domain", null));
         assertFalse(domainCheck.isSatisfied(null, "domain@com", null));
     }

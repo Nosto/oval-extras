@@ -23,7 +23,7 @@ import static org.junit.Assert.assertTrue;
  *
  * @author mridang
  */
-public class IPCheckTest {
+public class IPCheckTest extends AbstractContraintsTest {
 
     /**
      * Simple test to check that the the checker handles null values
@@ -31,6 +31,8 @@ public class IPCheckTest {
     @Test
     public void testEmptyValues() {
         IPCheck addressChecker = new IPCheck();
+        super.testCheck(addressChecker);
+
         assertTrue(addressChecker.isSatisfied(null, null));
         assertTrue(addressChecker.isSatisfied(null, new HashSet<String>()));
     }
@@ -41,6 +43,8 @@ public class IPCheckTest {
     @Test
     public void testInvalidAddresses() {
         IPCheck addressChecker = new IPCheck();
+        super.testCheck(addressChecker);
+
         Set<String> ignoredAddresses = new HashSet<>();
         ignoredAddresses.add("0.0.0.0");
         assertTrue(addressChecker.isSatisfied(null, ignoredAddresses));

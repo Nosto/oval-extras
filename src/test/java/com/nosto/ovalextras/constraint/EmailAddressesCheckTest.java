@@ -23,7 +23,7 @@ import static org.junit.Assert.assertTrue;
  *
  * @author mridang
  */
-public class EmailAddressesCheckTest {
+public class EmailAddressesCheckTest extends AbstractContraintsTest {
 
     /**
      * Simple test to check that the the checker handles null values
@@ -31,6 +31,8 @@ public class EmailAddressesCheckTest {
     @Test
     public void testEmptyValues() {
         EmailsCheck addressChecker = new EmailsCheck();
+        super.testCheck(addressChecker);
+
         assertTrue(addressChecker.isSatisfied(null, null, null));
         assertTrue(addressChecker.isSatisfied(null, new HashSet<String>(), null));
     }
@@ -41,6 +43,8 @@ public class EmailAddressesCheckTest {
     @Test
     public void testInvalidAddresses() {
         EmailsCheck addressChecker = new EmailsCheck();
+        super.testCheck(addressChecker);
+
         Set<String> ignoredAddresses = new HashSet<>();
         ignoredAddresses.add("test@example.com");
         assertTrue(addressChecker.isSatisfied(null, ignoredAddresses, null));

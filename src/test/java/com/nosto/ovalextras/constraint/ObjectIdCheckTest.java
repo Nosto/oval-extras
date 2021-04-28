@@ -16,17 +16,21 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class ObjectIdCheckTest {
+public class ObjectIdCheckTest extends AbstractContraintsTest {
 
     @Test
     public void testValidObjectId() {
         ObjectIdCheck objectIdCheck = new ObjectIdCheck();
+        super.testCheck(objectIdCheck);
+
         assertTrue(objectIdCheck.isSatisfied(null, ObjectId.get(), null));
     }
 
     @Test
     public void testInvalidObjectId() {
         ObjectIdCheck objectIdCheck = new ObjectIdCheck();
+        super.testCheck(objectIdCheck);
+
         assertFalse(objectIdCheck.isSatisfied(null, "12324", null));
         assertFalse(objectIdCheck.isSatisfied(null, "", null));
         assertFalse(objectIdCheck.isSatisfied(null, "someObjectId", null));

@@ -14,11 +14,13 @@ import java.util.Locale;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class LanguageCheckTest {
+public class LanguageCheckTest extends AbstractContraintsTest {
 
     @Test
     public void testValidLanguage() {
         LanguageCheck languageCheck = new LanguageCheck();
+        super.testCheck(languageCheck);
+
         assertTrue(languageCheck.isSatisfied(null, new Locale("en").getLanguage(), null));
         assertTrue(languageCheck.isSatisfied(null, new Locale("fi").getLanguage(), null));
         assertTrue(languageCheck.isSatisfied(null, new Locale("it").getLanguage(), null));
@@ -27,6 +29,8 @@ public class LanguageCheckTest {
     @Test
     public void testInvalidLanguage() {
         LanguageCheck languageCheck = new LanguageCheck();
+        super.testCheck(languageCheck);
+
         assertFalse(languageCheck.isSatisfied(null, "english", null));
         assertFalse(languageCheck.isSatisfied(null, "", null));
     }

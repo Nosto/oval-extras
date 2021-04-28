@@ -14,11 +14,13 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class URLCheckTest {
+public class URLCheckTest extends AbstractContraintsTest {
 
     @Test
     public void isSatisfied() {
         URLCheck urlCheck = new URLCheck();
+        super.testCheck(urlCheck);
+
         assertTrue(urlCheck.isSatisfied(null, "//example.dev", null));
         assertFalse(urlCheck.isSatisfied(null, "//example.test", null));
         assertFalse(urlCheck.isSatisfied(null, "//example.local", null));

@@ -14,11 +14,13 @@ import java.util.Locale;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class CountryCheckTest {
+public class CountryCheckTest extends AbstractContraintsTest {
 
     @Test
     public void testValidCountryCodes() {
         CountryCheck countryCheck = new CountryCheck();
+        super.testCheck(countryCheck);
+
         assertTrue(countryCheck.isSatisfied(null, new Locale("", "AL").getCountry() , null));
         assertTrue(countryCheck.isSatisfied(null, new Locale("", "IT").getCountry() , null));
         assertTrue(countryCheck.isSatisfied(null, new Locale("", "FI").getCountry() , null));
@@ -28,6 +30,8 @@ public class CountryCheckTest {
     @Test
     public void testInvalidCountryCode() {
         CountryCheck countryCheck = new CountryCheck();
+        super.testCheck(countryCheck);
+
         assertFalse(countryCheck.isSatisfied(null, "NoWhere" , null));
         assertFalse(countryCheck.isSatisfied(null, "Somewhere" , null));
         assertFalse(countryCheck.isSatisfied(null, "" , null));

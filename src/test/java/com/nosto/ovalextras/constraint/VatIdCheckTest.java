@@ -20,7 +20,7 @@ import java.lang.annotation.Annotation;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class VatIdCheckTest {
+public class VatIdCheckTest extends AbstractContraintsTest {
     private static final String NO_VAT = null;
     private static final String INVALID_VAT = "123";
     //ToDo double check if this should be public
@@ -86,6 +86,8 @@ public class VatIdCheckTest {
     public void testWithNonEuCountry() {
         VatIdCheck vatCheck = new VatIdCheck();
         vatCheck.configure(vatAnnotation);
+        super.testCheck(vatCheck);
+
         assertTrue(vatCheck.isSatisfied(new TestEntity("US", true), NO_VAT, null));
         assertTrue(vatCheck.isSatisfied(new TestEntity("US", true), INVALID_VAT, null));
         assertTrue(vatCheck.isSatisfied(new TestEntity("US", true), VALID_FINNISH_VAT_CODE, null));
@@ -95,6 +97,8 @@ public class VatIdCheckTest {
     public void testWithEuCountry() {
         VatIdCheck vatCheck = new VatIdCheck();
         vatCheck.configure(vatAnnotation);
+        super.testCheck(vatCheck);
+
         assertFalse(vatCheck.isSatisfied(new TestEntity("FI", true), NO_VAT, null));
         assertFalse(vatCheck.isSatisfied(new TestEntity("FI", true), INVALID_VAT, null));
         assertTrue(vatCheck.isSatisfied(new TestEntity("FI", true), VALID_FINNISH_VAT_CODE,  null));
@@ -104,6 +108,8 @@ public class VatIdCheckTest {
     public void testWithEuCountryVatValidationIgnored() {
         VatIdCheck vatCheck = new VatIdCheck();
         vatCheck.configure(vatAnnotationIgnoreValidation);
+        super.testCheck(vatCheck);
+
         assertTrue(vatCheck.isSatisfied(new TestEntity("FI", true), NO_VAT, null));
         assertTrue(vatCheck.isSatisfied(new TestEntity("FI", true), INVALID_VAT, null));
         assertTrue(vatCheck.isSatisfied(new TestEntity("FI", true), VALID_FINNISH_VAT_CODE, null, null));
@@ -115,6 +121,7 @@ public class VatIdCheckTest {
         @SuppressWarnings({"unused", "FieldCanBeLocal"})
         private final boolean ignoreValidation;
 
+        @SuppressWarnings("SameParameterValue")
         private TestEntity(String countryCode, boolean ignoreValidation) {
             this.countryCode = countryCode;
             this.ignoreValidation = ignoreValidation;
