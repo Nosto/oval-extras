@@ -20,8 +20,6 @@ import net.sf.oval.exception.OValException;
  */
 public class CurrencyCheck extends AbstractAnnotationCheck<Currency> {
 
-    public static final String MESSAGE = "global.merchant.currency.invalid";
-
     public static boolean isValidCurrency(Object value) {
         try {
             java.util.Currency.getInstance(value.toString().trim().toUpperCase());

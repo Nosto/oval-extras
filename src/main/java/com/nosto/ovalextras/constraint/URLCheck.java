@@ -17,17 +17,13 @@ import org.apache.commons.lang3.StringUtils;
 
 public class URLCheck extends AbstractAnnotationCheck<URL> {
 
-    public boolean isSatisfied(Object object, Object value) throws OValException {
+    @Override
+    public boolean isSatisfied(final Object validatedObject, final Object value, final ValidationCycle cycle) throws OValException {
         String url = (String) value;
         if (StringUtils.isBlank(url)) {
             return true;
         } else {
             return URLUtils.isValid(url);
         }
-    }
-
-    @Override
-    public boolean isSatisfied(final Object validatedObject, final Object value, final ValidationCycle cycle) throws OValException {
-        return isSatisfied(validatedObject, value);
     }
 }

@@ -33,8 +33,8 @@ public class IPCheckTest extends AbstractContraintsTest {
         IPCheck addressChecker = new IPCheck();
         super.testCheck(addressChecker);
 
-        assertTrue(addressChecker.isSatisfied(null, null));
-        assertTrue(addressChecker.isSatisfied(null, new HashSet<String>()));
+        assertTrue(addressChecker.isSatisfied(null, null, null));
+        assertTrue(addressChecker.isSatisfied(null, new HashSet<String>(), null));
     }
 
     /**
@@ -47,12 +47,12 @@ public class IPCheckTest extends AbstractContraintsTest {
 
         Set<String> ignoredAddresses = new HashSet<>();
         ignoredAddresses.add("0.0.0.0");
-        assertTrue(addressChecker.isSatisfied(null, ignoredAddresses));
+        assertTrue(addressChecker.isSatisfied(null, ignoredAddresses, null));
         ignoredAddresses.add("127.0.0.1");
-        assertTrue(addressChecker.isSatisfied(null, ignoredAddresses));
+        assertTrue(addressChecker.isSatisfied(null, ignoredAddresses, null));
         ignoredAddresses.add("255.255.255.255");
-        assertTrue(addressChecker.isSatisfied(null, ignoredAddresses));
+        assertTrue(addressChecker.isSatisfied(null, ignoredAddresses, null));
         ignoredAddresses.add("256.256.256.256.256");
-        assertFalse(addressChecker.isSatisfied(null, ignoredAddresses));
+        assertFalse(addressChecker.isSatisfied(null, ignoredAddresses, null));
     }
 }

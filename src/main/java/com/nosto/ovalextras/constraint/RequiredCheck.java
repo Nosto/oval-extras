@@ -14,7 +14,7 @@ import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
 
 import java.util.Collection;
 
-@SuppressWarnings("serial")
+@SuppressWarnings("unused")
 public class RequiredCheck extends AbstractAnnotationCheck<Required> {
 
     @Override

@@ -5,7 +5,6 @@
 package com.nosto.ovalextras.constraint;
 
 import net.sf.oval.Check;
-import net.sf.oval.Validator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -13,7 +12,6 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Sebastian Thomschke
  */
 public abstract class AbstractContraintsTest {
-    protected final Validator validator = new Validator();
 
     /**
      * Performs basic tests of the check implementation.

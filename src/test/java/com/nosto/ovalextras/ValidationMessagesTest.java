@@ -33,7 +33,6 @@ public class ValidationMessagesTest {
     @Rule
     public ErrorCollector errorCollector = new ErrorCollector();
 
-    @SuppressWarnings("RawUseOfParameterizedType")
     @Test
     public void testMessageHandling() {
 

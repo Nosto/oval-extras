@@ -17,6 +17,7 @@ import net.sf.oval.exception.OValException;
 import java.util.Arrays;
 import java.util.Map;
 
+@SuppressWarnings("unused")
 public class ContainsCheck extends AbstractAnnotationCheck<Contains> {
 
     private String[] values;

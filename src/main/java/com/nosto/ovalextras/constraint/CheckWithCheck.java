@@ -16,7 +16,7 @@ import java.lang.reflect.Constructor;
 import java.util.Map;
 import java.util.TreeMap;
 
-@SuppressWarnings("serial")
+@SuppressWarnings({"unused"})
 public class CheckWithCheck extends AbstractAnnotationCheck<CheckWith> {
 
     static final String MES = "validation.invalid";
