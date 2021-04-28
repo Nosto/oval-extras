@@ -19,13 +19,13 @@ import java.util.Collection;
 
 public class DomainCheck extends AbstractAnnotationCheck<Domain> {
 
-    @SuppressWarnings({"unchecked", ""})
+    @SuppressWarnings({"unchecked"})
     private static boolean isValidDomain(Object value) {
         if (value instanceof String) {
             String subDomain = (String) value;
             return StringUtils.isBlank(subDomain) || URIUtil.isValidDomain(subDomain);
         } else if (value instanceof Collection) {
-            Collection<String> col = (Collection) value;
+            Collection<String> col = (Collection<String>) value;
             return col.stream().allMatch(URIUtil::isValidDomain);
         } else {
             throw new UnsupportedOperationException();

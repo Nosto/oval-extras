@@ -43,6 +43,7 @@ public class VatIdCheckTest extends AbstractContraintsTest {
             return "";
         }
 
+        @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
         @Override
         public boolean equals(Object o) {
             return EqualsBuilder.reflectionEquals(this, o);
@@ -71,6 +72,7 @@ public class VatIdCheckTest extends AbstractContraintsTest {
             return "ignoreValidation";
         }
 
+        @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
         @Override
         public boolean equals(Object o) {
             return EqualsBuilder.reflectionEquals(this, o);
@@ -112,7 +114,7 @@ public class VatIdCheckTest extends AbstractContraintsTest {
 
         assertTrue(vatCheck.isSatisfied(new TestEntity("FI", true), NO_VAT, null));
         assertTrue(vatCheck.isSatisfied(new TestEntity("FI", true), INVALID_VAT, null));
-        assertTrue(vatCheck.isSatisfied(new TestEntity("FI", true), VALID_FINNISH_VAT_CODE, null, null));
+        assertTrue(vatCheck.isSatisfied(new TestEntity("FI", true), VALID_FINNISH_VAT_CODE, null));
     }
 
     private static class TestEntity {

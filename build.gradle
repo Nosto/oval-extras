@@ -1,4 +1,5 @@
 //file:noinspection GrUnresolvedAccess
+//file:noinspection GroovyAssignabilityCheck
 import net.ltgt.gradle.errorprone.*
 
 buildscript {
@@ -197,22 +198,18 @@ publishing {
         }
     }
     publications {
-        //noinspection GroovyAssignabilityCheck
         mavenJava(MavenPublication) {
             versionMapping {
                 usage('java-api') {
                     fromResolutionOf('runtimeClasspath')
                 }
                 usage('java-runtime') {
-                    //noinspection GroovyImplicitNullArgumentCall
                     fromResolutionResult()
                 }
             }
-            //noinspection GroovyAssignabilityCheck
             from components.java
 
             pom {
-                //noinspection GroovyAssignabilityCheck
                 name = 'Oval Extras'
                 description = 'A simple library to sanity-check your bean ser-deser'
                 url = 'https://github.com/nosto/oval-extras'
