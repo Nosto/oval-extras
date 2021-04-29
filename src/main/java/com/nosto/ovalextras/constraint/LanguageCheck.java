@@ -10,12 +10,10 @@
 package com.nosto.ovalextras.constraint;
 
 import com.google.common.collect.ImmutableList;
-import net.sf.oval.Validator;
+import net.sf.oval.ValidationCycle;
 import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
-import net.sf.oval.context.OValContext;
 import net.sf.oval.exception.OValException;
 
-import java.util.List;
 import java.util.Locale;
 
 /**
@@ -25,16 +23,14 @@ import java.util.Locale;
  */
 public class LanguageCheck extends AbstractAnnotationCheck<Language> {
 
-    public static final String INVALID_LANGUAGE_CODE = "Language code is invalid. Use ISO 639 two letter codes such as 'us' or 'fr'";
-    public static final String MESSAGE = "global.merchant.language.invalid";
-    private static final List<String> LANGUAGES = ImmutableList.copyOf(Locale.getISOLanguages());
+    private static final ImmutableList<String> LANGUAGES = ImmutableList.copyOf(Locale.getISOLanguages());
 
     public static boolean isValid(String value) {
         return LANGUAGES.contains(value);
     }
 
     @Override
-    public boolean isSatisfied(Object object, Object value, OValContext context, Validator validator) throws OValException {
+    public boolean isSatisfied(final Object validatedObject, final Object value, final ValidationCycle cycle) throws OValException {
         if (value == null) {
             return true;
         } else {

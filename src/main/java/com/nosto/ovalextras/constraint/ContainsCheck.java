@@ -9,14 +9,15 @@
  ******************************************************************************/
 package com.nosto.ovalextras.constraint;
 
+import net.sf.oval.ValidationCycle;
 import net.sf.oval.Validator;
 import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
-import net.sf.oval.context.OValContext;
 import net.sf.oval.exception.OValException;
 
 import java.util.Arrays;
 import java.util.Map;
 
+@SuppressWarnings("unused")
 public class ContainsCheck extends AbstractAnnotationCheck<Contains> {
 
     private String[] values;
@@ -27,7 +28,7 @@ public class ContainsCheck extends AbstractAnnotationCheck<Contains> {
     }
 
     @Override
-    public boolean isSatisfied(Object validatedObject, Object value, OValContext context, Validator validator) throws OValException {
+    public boolean isSatisfied(final Object validatedObject, final Object value, final ValidationCycle cycle) throws OValException {
         return Arrays.stream(values).allMatch(value.toString()::contains);
     }
 

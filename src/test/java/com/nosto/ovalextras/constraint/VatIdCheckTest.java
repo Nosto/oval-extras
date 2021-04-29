@@ -10,18 +10,23 @@
 
 package com.nosto.ovalextras.constraint;
 
-import org.junit.Assert;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.junit.Test;
 
 import javax.annotation.Nullable;
 import java.lang.annotation.Annotation;
 
-public class VatIdCheckTest extends Assert {
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+public class VatIdCheckTest extends AbstractContraintsTest {
     private static final String NO_VAT = null;
     private static final String INVALID_VAT = "123";
-    private static final String VALID_FINNISH_VAT_CODE = "2418911-9";
+    //ToDo double check if this should be public
+    private static final String VALID_FINNISH_VAT_CODE = "24189119";
 
-    private VatId vatAnnotation = new VatId() {
+    private final VatId vatAnnotation = new VatId() {
         @Nullable
         @Override
         public Class<? extends Annotation> annotationType() {
@@ -37,9 +42,20 @@ public class VatIdCheckTest extends Assert {
         public String ignoreValidationField() {
             return "";
         }
+
+        @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
+        @Override
+        public boolean equals(Object o) {
+            return EqualsBuilder.reflectionEquals(this, o);
+        }
+
+        @Override
+        public int hashCode() {
+            return HashCodeBuilder.reflectionHashCode(this);
+        }
     };
     
-    private VatId vatAnnotationIgnoreValidation = new VatId() {
+    private final VatId vatAnnotationIgnoreValidation = new VatId() {
         @Nullable
         @Override
         public Class<? extends Annotation> annotationType() {
@@ -55,41 +71,59 @@ public class VatIdCheckTest extends Assert {
         public String ignoreValidationField() {
             return "ignoreValidation";
         }
+
+        @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
+        @Override
+        public boolean equals(Object o) {
+            return EqualsBuilder.reflectionEquals(this, o);
+        }
+
+        @Override
+        public int hashCode() {
+            return HashCodeBuilder.reflectionHashCode(this);
+        }
     };
 
     @Test
     public void testWithNonEuCountry() {
         VatIdCheck vatCheck = new VatIdCheck();
         vatCheck.configure(vatAnnotation);
-        assertTrue(vatCheck.isSatisfied(new TestEntity("US", true), NO_VAT, null, null));
-        assertTrue(vatCheck.isSatisfied(new TestEntity("US", true), INVALID_VAT, null, null));
-        assertTrue(vatCheck.isSatisfied(new TestEntity("US", true), VALID_FINNISH_VAT_CODE, null, null));
+        super.testCheck(vatCheck);
+
+        assertTrue(vatCheck.isSatisfied(new TestEntity("US", true), NO_VAT, null));
+        assertTrue(vatCheck.isSatisfied(new TestEntity("US", true), INVALID_VAT, null));
+        assertTrue(vatCheck.isSatisfied(new TestEntity("US", true), VALID_FINNISH_VAT_CODE, null));
     }
 
     @Test
     public void testWithEuCountry() {
         VatIdCheck vatCheck = new VatIdCheck();
         vatCheck.configure(vatAnnotation);
-        assertFalse(vatCheck.isSatisfied(new TestEntity("FI", true), NO_VAT, null, null));
-        assertFalse(vatCheck.isSatisfied(new TestEntity("FI", true), INVALID_VAT, null, null));
-        assertTrue(vatCheck.isSatisfied(new TestEntity("FI", true), VALID_FINNISH_VAT_CODE, null, null));
+        super.testCheck(vatCheck);
+
+        assertFalse(vatCheck.isSatisfied(new TestEntity("FI", true), NO_VAT, null));
+        assertFalse(vatCheck.isSatisfied(new TestEntity("FI", true), INVALID_VAT, null));
+        assertTrue(vatCheck.isSatisfied(new TestEntity("FI", true), VALID_FINNISH_VAT_CODE,  null));
     }
 
     @Test
     public void testWithEuCountryVatValidationIgnored() {
         VatIdCheck vatCheck = new VatIdCheck();
         vatCheck.configure(vatAnnotationIgnoreValidation);
-        assertTrue(vatCheck.isSatisfied(new TestEntity("FI", true), NO_VAT, null, null));
-        assertTrue(vatCheck.isSatisfied(new TestEntity("FI", true), INVALID_VAT, null, null));
-        assertTrue(vatCheck.isSatisfied(new TestEntity("FI", true), VALID_FINNISH_VAT_CODE, null, null));
+        super.testCheck(vatCheck);
+
+        assertTrue(vatCheck.isSatisfied(new TestEntity("FI", true), NO_VAT, null));
+        assertTrue(vatCheck.isSatisfied(new TestEntity("FI", true), INVALID_VAT, null));
+        assertTrue(vatCheck.isSatisfied(new TestEntity("FI", true), VALID_FINNISH_VAT_CODE, null));
     }
 
     private static class TestEntity {
-        @SuppressWarnings("unused")
-        private String countryCode;
-        @SuppressWarnings("unused")
-        private boolean ignoreValidation;
+        @SuppressWarnings({"unused", "FieldCanBeLocal"})
+        private final String countryCode;
+        @SuppressWarnings({"unused", "FieldCanBeLocal"})
+        private final boolean ignoreValidation;
 
+        @SuppressWarnings("SameParameterValue")
         private TestEntity(String countryCode, boolean ignoreValidation) {
             this.countryCode = countryCode;
             this.ignoreValidation = ignoreValidation;

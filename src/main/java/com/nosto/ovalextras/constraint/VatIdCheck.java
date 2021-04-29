@@ -12,19 +12,15 @@ package com.nosto.ovalextras.constraint;
 
 import ch.digitalfondue.vatchecker.EUVatCheckResponse;
 import ch.digitalfondue.vatchecker.EUVatChecker;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import net.sf.oval.ValidationCycle;
 import net.sf.oval.Validator;
 import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
-import net.sf.oval.context.OValContext;
 import net.sf.oval.exception.OValException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 
 import javax.annotation.Nullable;
-import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -43,7 +39,7 @@ public class VatIdCheck extends AbstractAnnotationCheck<VatId> {
     }
 
     @Override
-    public boolean isSatisfied(Object validatedObject, @Nullable Object value, @Nullable OValContext context, @Nullable Validator validator) throws OValException {
+    public boolean isSatisfied(Object validatedObject, @Nullable Object value, @Nullable ValidationCycle validator) throws OValException {
         String countryCode = getCountryCode(validatedObject);
         String vat = (String) value;
         return getIgnoreValidation(validatedObject) || !CountryUtils.isEuCountry(countryCode) || isValid(vat, countryCode);
@@ -108,44 +104,23 @@ public class VatIdCheck extends AbstractAnnotationCheck<VatId> {
          */
         private static final String VAT_ID_PREFIX_GREECE = "EL";
 
-        private static final Map<String, String> COUNTRY_NAME_TO_CODE;
-        private static final Map<String, String> COUNTRY_CODE_TO_NAME;
-        /**
-         * Amount of VAT that we invoice. currently we only invoice VAT from finnish at 24%
-         */
-        private static final ImmutableMap<String, BigDecimal> APPLIED_VAT =
-                ImmutableMap.of("FI", new BigDecimal("0.24"));
-
-        static {
-            Map<String, String> countryNameToCode = new HashMap<>();
-            Map<String, String> countryCodeToName = new HashMap<>();
-            for (String countryCode : Locale.getISOCountries()) {
-                Locale locale = new Locale("", countryCode);
-                countryNameToCode.put(locale.getDisplayCountry(), countryCode);
-                countryCodeToName.put(countryCode, locale.getDisplayCountry());
-            }
-            COUNTRY_NAME_TO_CODE = ImmutableMap.copyOf(countryNameToCode);
-            COUNTRY_CODE_TO_NAME = ImmutableMap.copyOf(countryCodeToName);
-        }
-
-        private CountryUtils() {}
-
-        public static boolean isEuCountry(@Nullable String country) {
+        @SuppressWarnings({"BooleanMethodIsAlwaysInverted"})
+        public static boolean isEuCountry(String country) {
             if (country == null) {
                 return false;
             }
             return EU_COUNTRIES.contains(country.toUpperCase());
         }
 
-        public static boolean isValidVatId(@Nullable String vat, String countryCode) {
+        public static boolean isValidVatId(String vat, String countryCode) {
             String vatPrefix = COUNTRY_CODE_GREECE.equals(countryCode) ? VAT_ID_PREFIX_GREECE : countryCode;
             if (StringUtils.startsWith(vat, vatPrefix)) {
                 vat = StringUtils.removeStart(vat, vatPrefix);
             }
-            return !isEuCountry(countryCode) || (vat != null && validate(countryCode, vat));
+            return !isEuCountry(countryCode) || (vat != null && validate(vat, countryCode));
         }
 
-        private static boolean validate(@Nullable String vat, String countryCode) {
+        private static boolean validate(String vat, String countryCode) {
             EUVatCheckResponse resp = EUVatChecker.doCheck(countryCode, vat);
             return resp.isValid();
         }

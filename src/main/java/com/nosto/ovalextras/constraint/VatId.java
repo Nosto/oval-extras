@@ -26,6 +26,8 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD, ElementType.PARAMETER, ElementType.TYPE, ElementType.TYPE_USE, ElementType.METHOD})
 @Constraint(checkWith = VatIdCheck.class)
 public @interface VatId {
+
+    @SuppressWarnings("SameReturnValue")
     String countryCodeField();
 
     String ignoreValidationField() default "";

@@ -27,7 +27,7 @@ public final class URIUtil {
 
     /**
      *
-     * @param uri
+     * @param uri uri
      * @return domain name without the subdomain 'www'
      */
     @Nullable
