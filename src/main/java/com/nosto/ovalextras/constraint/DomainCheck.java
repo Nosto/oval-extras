@@ -17,6 +17,12 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Collection;
 
+/**
+ * Checks if the value given is a correct domain, or list of domains
+ *
+ * <br>
+ * <b>Note:</b> This constraint is also satisfied when the value to validate is null, therefore you might also need to specified @NotNull
+ */
 public class DomainCheck extends AbstractAnnotationCheck<Domain> {
 
     @SuppressWarnings({"unchecked"})
