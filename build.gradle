@@ -1,5 +1,5 @@
 //file:noinspection GrUnresolvedAccess
-import net.ltgt.gradle.errorprone.*
+import net.ltgt.gradle.errorprone.CheckSeverity
 
 buildscript {
     buildscript {
@@ -10,10 +10,10 @@ buildscript {
             jcenter()
         }
         dependencies {
-            classpath "net.ltgt.gradle:gradle-errorprone-plugin:0.8"
-            classpath "net.ltgt.gradle:gradle-nullaway-plugin:0.2"
-            classpath "com.diffplug.spotless:spotless-plugin-gradle:3.23.0"
-            classpath "gradle.plugin.com.github.spotbugs.snom:spotbugs-gradle-plugin:4.0.5"
+            classpath "com.diffplug.spotless:spotless-plugin-gradle:5.12.4"
+            classpath "gradle.plugin.com.github.spotbugs.snom:spotbugs-gradle-plugin:4.7.1"
+            classpath "net.ltgt.gradle:gradle-errorprone-plugin:2.0.1"
+            classpath "net.ltgt.gradle:gradle-nullaway-plugin:1.1.0"
             classpath "gradle.plugin.com.dorongold.plugins:task-tree:1.5"
         }
     }
@@ -23,15 +23,14 @@ apply plugin: 'java'
 apply plugin: 'checkstyle'
 apply plugin: "com.github.spotbugs"
 apply plugin: 'maven-publish'
-apply plugin: 'maven-publish'
-apply plugin: 'com.diffplug.gradle.spotless'
+apply plugin: 'com.diffplug.spotless'
 apply plugin: 'net.ltgt.errorprone'
 apply plugin: 'net.ltgt.nullaway'
 apply plugin: "com.dorongold.task-tree"
 apply plugin: "jacoco"
 
 group 'com.nosto'
-version '1.0.2'
+version '0.0.1'
 
 java {
     withJavadocJar()
@@ -248,15 +247,15 @@ javadoc {
     }
 }
 
-// Task for building the zip file for upload
-task buildZip(type: Zip) {
-    archiveBaseName.set(rootProject.name)
-    from compileJava
-    from processResources
-    into('lib') {
-        from configurations.runtime
-    }
-}
-
-//noinspection GrUnresolvedAccess
-build.dependsOn buildZip
+//// Task for building the zip file for upload
+//task buildZip(type: Zip) {
+//    archiveBaseName.set(rootProject.name)
+//    from compileJava
+//    from processResources
+//    into('lib') {
+//        from configurations.runtime
+//    }
+//}
+//
+////noinspection GrUnresolvedAccess
+//build.dependsOn buildZip
