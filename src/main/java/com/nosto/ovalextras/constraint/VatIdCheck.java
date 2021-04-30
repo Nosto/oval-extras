@@ -14,113 +14,53 @@ import ch.digitalfondue.vatchecker.EUVatCheckResponse;
 import ch.digitalfondue.vatchecker.EUVatChecker;
 import com.google.common.collect.ImmutableSet;
 import net.sf.oval.ValidationCycle;
-import net.sf.oval.Validator;
 import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
 import net.sf.oval.exception.OValException;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.reflect.FieldUtils;
 
-import javax.annotation.Nullable;
-import java.util.Map;
-
-/**
- * Checks if the value given is a correct VAT format
- */
 public class VatIdCheck extends AbstractAnnotationCheck<VatId> {
 
-    private VatId vat;
-    private String country;
-
     @Override
-    public void configure(VatId vat) {
-        this.vat = vat;
-    }
-
-    @Override
-    public boolean isSatisfied(Object validatedObject, @Nullable Object value, @Nullable ValidationCycle validator) throws OValException {
-        String countryCode = getCountryCode(validatedObject);
-        String vat = (String) value;
-        return getIgnoreValidation(validatedObject) || !CountryUtils.isEuCountry(countryCode) || isValid(vat, countryCode);
-    }
-
-    private boolean isValid(String vat, String countryCode) {
-        if (StringUtils.isBlank(vat)) {
-            setMessage("com.nosto.validation.constraint.VatId.required");
+    public boolean isSatisfied(Object validatedObject, Object value, ValidationCycle validator) throws OValException {
+        if (value == null) {
             return false;
-        } else if (!CountryUtils.isValidVatId(vat, countryCode)) {
-            this.country = new java.util.Locale("", countryCode).getDisplayCountry();
-            requireMessageVariablesRecreation();
-            setMessage("com.nosto.validation.constraint.VatId.violated");
+        } else {
+            return isValid(value.toString());
+        }
+    }
+
+    private boolean isValid(String vat) {
+        if (vat.isEmpty()) {
             return false;
         }
-        return true;
+
+        String countryVatCode = vat.substring(0, 2);
+        if (!CountryUtils.isEuCountry(countryVatCode)) {
+            return true;
+        }
+
+        String vatNumber = vat.substring(2);
+        return validateEUVat(countryVatCode, vatNumber);
     }
 
-    private String getCountryCode(Object validatedObject) {
-        try {
-            return (String) FieldUtils.readDeclaredField(validatedObject, vat.countryCodeField(), true);
-        } catch (Exception e) {
-            throw new IllegalStateException("Failed to read country code field from validated object.", e);
-        }
-    }
-
-    private boolean getIgnoreValidation(Object validatedObject) {
-        if (StringUtils.isBlank(vat.ignoreValidationField())) {
-            // If no vat field is not defined in annotation then this method returns false to indicate that there is no field to explicitly disable vat check 
-            return false;
-        }
-        try {
-            return (boolean) FieldUtils.readDeclaredField(validatedObject, vat.ignoreValidationField(), true);
-        } catch (Exception e) {
-            throw new IllegalStateException("Failed to read no ignore validation field from validated object.", e);
-        }
-    }
-
-    @Override
-    protected Map<String, String> createMessageVariables() {
-        Map<String, String> messageVariables = Validator.getCollectionFactory().createMap(1);
-        messageVariables.put("country", country);
-        return messageVariables;
+    private boolean validateEUVat(String vatCountryCode, String vatNumber) {
+        EUVatCheckResponse resp = EUVatChecker.doCheck(vatCountryCode, vatNumber);
+        return resp.isValid();
     }
 
     private static class CountryUtils {
         // Croatia 1st July 2013 onwards
         // UK left EU from 1st January 2021
-        public static final ImmutableSet<String> EU_COUNTRIES =
-                ImmutableSet.of("AT", "BE", "BG", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "GR", "HU", "IE", "IT",
+        public static final ImmutableSet<String> VAT_CODES_FOR_EU_COUNTRIES =
+                ImmutableSet.of("AT", "BE", "BG", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "EL", "HU", "IE", "IT",
                         "LV", "LT", "LU", "MT", "NL", "PL", "PT", "RO", "SK", "SI", "ES", "SE", "HR");
 
-        /**
-         * @see #VAT_ID_PREFIX_GREECE
-         */
-        private static final String COUNTRY_CODE_GREECE = "GR";
-        /**
-         * Full EU VAT ID starts with country code except in case of Greece.
-         * Greece uses EL as VAT prefix instead of its country code GR.
-         * https://en.wikipedia.org/wiki/VAT_identification_number
-         * @see #COUNTRY_CODE_GREECE
-         */
-        private static final String VAT_ID_PREFIX_GREECE = "EL";
 
         @SuppressWarnings({"BooleanMethodIsAlwaysInverted"})
         public static boolean isEuCountry(String country) {
             if (country == null) {
                 return false;
             }
-            return EU_COUNTRIES.contains(country.toUpperCase());
-        }
-
-        public static boolean isValidVatId(String vat, String countryCode) {
-            String vatPrefix = COUNTRY_CODE_GREECE.equals(countryCode) ? VAT_ID_PREFIX_GREECE : countryCode;
-            if (StringUtils.startsWith(vat, vatPrefix)) {
-                vat = StringUtils.removeStart(vat, vatPrefix);
-            }
-            return !isEuCountry(countryCode) || (vat != null && validate(vat, countryCode));
-        }
-
-        private static boolean validate(String vat, String countryCode) {
-            EUVatCheckResponse resp = EUVatChecker.doCheck(countryCode, vat);
-            return resp.isValid();
+            return VAT_CODES_FOR_EU_COUNTRIES.contains(country.toUpperCase());
         }
     }
 
