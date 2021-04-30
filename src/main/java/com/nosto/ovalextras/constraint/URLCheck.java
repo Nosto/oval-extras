@@ -15,12 +15,6 @@ import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
 import net.sf.oval.exception.OValException;
 import org.apache.commons.lang3.StringUtils;
 
-/**
- * Checks if the value given is a correct url
- *
- * <br>
- * <b>Note:</b> This constraint is also satisfied when the value to validate is null or blank, therefore you might also need to specified @NotNull
- */
 public class URLCheck extends AbstractAnnotationCheck<URL> {
 
     @Override
