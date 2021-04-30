@@ -18,10 +18,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Custom validation class for Play that validates the list of ignored IP
- * addresses.
+ * Checks if the value given is a IP address
  *
- * @author mridang
+ * <br>
+ * <b>Note:</b> This constraint is also satisfied when the value to validate is null, therefore you might also need to specified @NotNull
  */
 public class IPCheck extends AbstractAnnotationCheck<IP> {
 

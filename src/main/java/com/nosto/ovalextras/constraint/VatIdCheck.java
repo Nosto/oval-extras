@@ -24,9 +24,7 @@ import javax.annotation.Nullable;
 import java.util.Map;
 
 /**
- * Play validation annotation to verify that VAT ID is mandatory in EU countries.
- * 
- * @see VatId
+ * Checks if the value given is a correct VAT format
  */
 public class VatIdCheck extends AbstractAnnotationCheck<VatId> {
 

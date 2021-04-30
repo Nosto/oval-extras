@@ -17,9 +17,10 @@ import net.sf.oval.exception.OValException;
 import java.util.Locale;
 
 /**
- * Custom validation class for Play that validates the languages
+ * Checks if the value given is a correct language ISO code
  *
- * @author mridang
+ * <br>
+ * <b>Note:</b> This constraint is also satisfied when the value to validate is null, therefore you might also need to specified @NotNull
  */
 public class LanguageCheck extends AbstractAnnotationCheck<Language> {
 

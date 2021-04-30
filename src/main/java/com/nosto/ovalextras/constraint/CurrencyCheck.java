@@ -14,9 +14,10 @@ import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
 import net.sf.oval.exception.OValException;
 
 /**
- * Custom validation class for Play that validates the currencies
+ * Checks if the value given is a correct currency format
  *
- * @author mridang
+ * <br>
+ * <b>Note:</b> This constraint is also satisfied when the value to validate is null, therefore you might also need to specified @NotNull
  */
 public class CurrencyCheck extends AbstractAnnotationCheck<Currency> {
 
