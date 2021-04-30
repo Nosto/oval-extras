@@ -9,27 +9,27 @@
  ******************************************************************************/
 package com.nosto.ovalextras.constraint;
 
+import com.google.i18n.phonenumbers.NumberParseException;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import com.google.i18n.phonenumbers.Phonenumber;
 import net.sf.oval.ValidationCycle;
 import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
 import net.sf.oval.exception.OValException;
 
-import java.util.regex.Pattern;
-
-/**
- * Checks if the value given is a correct phone code format
- *
- * <br>
- * <b>Note:</b> This constraint is also satisfied when the value to validate is null, therefore you might also need to specified @NotNull
- */
 public class PhoneCheck extends AbstractAnnotationCheck<Phone> {
-
-    private static final Pattern PATTERN = Pattern.compile("^([+][0-9]{1,3}([ .\\-]))?([(]{1}[0-9]{1,6}[)])?([0-9 .\\-/]{3,20})((x|ext|extension)[ ]?[0-9]{1,4})?$");
 
     @Override
     public boolean isSatisfied(final Object validatedObject, final Object value, final ValidationCycle cycle) throws OValException {
-        if (value == null || value.toString().length() == 0) {
+        if (value == null) {
             return true;
+        } else {
+            PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
+            try {
+                Phonenumber.PhoneNumber number = phoneUtil.parse(value.toString(), "FI");
+                return phoneUtil.isValidNumber(number);
+            } catch (NumberParseException e) {
+                return false;
+            }
         }
-        return PATTERN.matcher(value.toString()).matches();
     }
 }

@@ -23,6 +23,7 @@ public class PhoneCheckTest extends AbstractContraintsTest {
 
         assertTrue(phoneCheck.isSatisfied(null, "+1 4155552671", null));
         assertTrue(phoneCheck.isSatisfied(null, "+358 4353454364", null));
+        assertTrue(phoneCheck.isSatisfied(null, "+3584353454364", null));
         assertTrue(phoneCheck.isSatisfied(null, "00358 4353454364", null));
     }
 
@@ -32,5 +33,7 @@ public class PhoneCheckTest extends AbstractContraintsTest {
         super.testCheck(phoneCheck);
 
         assertFalse(phoneCheck.isSatisfied(null, "abcd", null));
+        assertFalse(phoneCheck.isSatisfied(null, "1234", null));
+        assertFalse(phoneCheck.isSatisfied(null, "", null));
     }
 }

@@ -17,12 +17,6 @@ import net.sf.oval.exception.OValException;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Checks if the value given is a IP address
- *
- * <br>
- * <b>Note:</b> This constraint is also satisfied when the value to validate is null, therefore you might also need to specified @NotNull
- */
 public class IPCheck extends AbstractAnnotationCheck<IP> {
 
     /**

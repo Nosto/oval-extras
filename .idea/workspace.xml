@@ -5,14 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9da7df8c-411d-4e5d-9177-d5356b029b03" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/CI.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/CI.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/oval-extras.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/oval-extras.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/resourceBundles.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nosto/ovalextras/constraint/URLCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nosto/ovalextras/constraint/URLCheck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nosto/ovalextras/constraint/VatIdCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nosto/ovalextras/constraint/VatIdCheck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/nosto/ovalextras/constraint/EmailAddressesCheckTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/nosto/ovalextras/constraint/EmailAddressesCheckTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/nosto/ovalextras/constraint/URLCheckTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/nosto/ovalextras/constraint/URLCheckTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/nosto/ovalextras/constraint/VatIdCheckTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/nosto/ovalextras/constraint/VatIdCheckTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nosto/ovalextras/constraint/PhoneCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nosto/ovalextras/constraint/PhoneCheck.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,7 +146,7 @@
       <recent name="com.nosto.ovalextras" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.VatIdCheckTest.testWithEuCountryVatValidationIgnored">
+  <component name="RunManager" selected="Gradle.PhoneCheckTest.testInvalidPhoneNumbers">
     <configuration default="true" type="lua.app" factoryName="Lua Application">
       <option name="program" value="lua" />
       <option name="file" value="" />
@@ -161,23 +157,46 @@
       <option name="showConsole" value="true" />
       <method v="2" />
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ValidationMessagesTest.testMessageHandling" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="PhoneCheckTest.testInvalidPhoneNumbers" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;com.nosto.ovalextras.constraint.ValidationMessagesTest.testMessageHandling&quot;" />
+        <option name="scriptParameters" value="--tests &quot;com.nosto.ovalextras.constraint.PhoneCheckTest.testInvalidPhoneNumbers&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="PhoneCheckTest.testValidPhoneNumbers" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;com.nosto.ovalextras.constraint.PhoneCheckTest.testValidPhoneNumbers&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -256,42 +275,21 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="oval-extras [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="clean" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
     <list>
-      <item itemvalue="Gradle.oval-extras [build]" />
-      <item itemvalue="Gradle.oval-extras [clean]" />
-      <item itemvalue="Gradle.ValidationMessagesTest.testMessageHandling" />
-      <item itemvalue="Gradle.VatIdCheckTest" />
       <item itemvalue="Gradle.Tests in 'com.nosto.ovalextras.constraint'" />
+      <item itemvalue="Gradle.oval-extras [build]" />
+      <item itemvalue="Gradle.VatIdCheckTest" />
       <item itemvalue="Gradle.VatIdCheckTest.testWithEuCountryVatValidationIgnored" />
+      <item itemvalue="Gradle.PhoneCheckTest.testValidPhoneNumbers" />
+      <item itemvalue="Gradle.PhoneCheckTest.testInvalidPhoneNumbers" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.PhoneCheckTest.testInvalidPhoneNumbers" />
+        <item itemvalue="Gradle.PhoneCheckTest.testValidPhoneNumbers" />
         <item itemvalue="Gradle.VatIdCheckTest.testWithEuCountryVatValidationIgnored" />
         <item itemvalue="Gradle.VatIdCheckTest" />
         <item itemvalue="Gradle.oval-extras [build]" />
-        <item itemvalue="Gradle.oval-extras [clean]" />
-        <item itemvalue="Gradle.ValidationMessagesTest.testMessageHandling" />
       </list>
     </recent_temporary>
   </component>
@@ -376,5 +374,13 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="com.nosto.ovalextras.constraint.VatIdCheckTest" memberName="vatAnnotationIgnoreValidation" />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/oval_extras$Tests_in__oval_extras_test_.ic" NAME="Tests in 'oval-extras.test' Coverage Results" MODIFIED="1619686500452" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

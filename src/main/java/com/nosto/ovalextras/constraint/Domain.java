@@ -12,11 +12,15 @@ package com.nosto.ovalextras.constraint;
 
 import net.sf.oval.configuration.annotation.Constraint;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
+/**
+ * Checks if the value given is a correct domain, or list of domains
+ *
+ * <br>
+ * <b>Note:</b> This constraint is also satisfied when the value to validate is null, therefore you might also need to specified @NotNull
+ */
+@Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.PARAMETER, ElementType.TYPE, ElementType.TYPE_USE, ElementType.METHOD})
 @Constraint(checkWith = DomainCheck.class)

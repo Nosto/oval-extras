@@ -12,23 +12,14 @@ package com.nosto.ovalextras.constraint;
 
 import net.sf.oval.configuration.annotation.Constraint;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
- * Play validation annotation to verify that VAT ID is mandatory in EU countries.
- * 
- * @see VatIdCheck
+ * Checks if the value given is a correct EU VAT format
+ * Returns true for non-EU vat codes
  */
+@Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.PARAMETER, ElementType.TYPE, ElementType.TYPE_USE, ElementType.METHOD})
 @Constraint(checkWith = VatIdCheck.class)
-public @interface VatId {
-
-    @SuppressWarnings("SameReturnValue")
-    String countryCodeField();
-
-    String ignoreValidationField() default "";
-}
+public @interface VatId {}

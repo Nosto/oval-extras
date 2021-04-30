@@ -13,12 +13,6 @@ import net.sf.oval.ValidationCycle;
 import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
 import net.sf.oval.exception.OValException;
 
-/**
- * Checks if the value given is a correct ObjectId
- *
- * <br>
- * <b>Note:</b> This constraint is also satisfied when the value to validate is null, therefore you might also need to specified @NotNull
- */
 public class ObjectIdCheck extends AbstractAnnotationCheck<ObjectId> {
 
     @Override

@@ -17,12 +17,6 @@ import net.sf.oval.exception.OValException;
 import java.util.Locale;
 import java.util.Set;
 
-/**
- * Check if the value is a correct ISO country code
- *
- * <br>
- * <b>Note:</b> This constraint is also satisfied when the value to validate is null, therefore you might also need to specified @NotNull
- */
 public class CountryCheck extends AbstractAnnotationCheck<Country> {
 
     @Override
