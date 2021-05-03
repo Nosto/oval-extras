@@ -24,4 +24,10 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.PARAMETER, ElementType.TYPE, ElementType.TYPE_USE, ElementType.METHOD})
 @Constraint(checkWith = IPCheck.class)
-public @interface IP {}
+public @interface IP {
+
+    /**
+     * message to be used for the ContraintsViolatedException
+     */
+    String message() default "com.nosto.ovalextras.constraint.IP.violated";
+}

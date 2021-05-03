@@ -21,4 +21,9 @@ import java.lang.annotation.Target;
 @Constraint(checkWith = ContainsCheck.class)
 public @interface Contains {
     String[] values();
+
+    /**
+     * message to be used for the ContraintsViolatedException
+     */
+    String message() default "com.nosto.ovalextras.constraint.Contains.violated";
 }

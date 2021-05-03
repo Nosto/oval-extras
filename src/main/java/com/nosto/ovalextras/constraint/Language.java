@@ -23,4 +23,10 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.PARAMETER, ElementType.TYPE, ElementType.TYPE_USE, ElementType.METHOD})
 @Constraint(checkWith = LanguageCheck.class)
-public @interface Language {}
+public @interface Language {
+
+    /**
+     * message to be used for the ContraintsViolatedException
+     */
+    String message() default "com.nosto.ovalextras.constraint.Language.violated";
+}

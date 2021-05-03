@@ -24,4 +24,10 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.PARAMETER, ElementType.TYPE, ElementType.TYPE_USE, ElementType.METHOD})
 @Constraint(checkWith = CountryCheck.class)
-public @interface Country {}
+public @interface Country {
+
+    /**
+     * message to be used for the ContraintsViolatedException
+     */
+    String message() default "com.nosto.ovalextras.constraint.Country.violated";
+}
