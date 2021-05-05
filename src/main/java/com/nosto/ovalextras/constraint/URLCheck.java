@@ -9,13 +9,30 @@
  ******************************************************************************/
 package com.nosto.ovalextras.constraint;
 
-import com.nosto.ovalextras.utils.URLUtils;
 import net.sf.oval.ValidationCycle;
 import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
 import net.sf.oval.exception.OValException;
+import okhttp3.HttpUrl;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.validator.routines.UrlValidator;
+
+import java.util.regex.Pattern;
 
 public class URLCheck extends AbstractAnnotationCheck<URL> {
+
+    public final static String ALLOW_LOCAL = "oval.url.allow.local";
+
+    private static final UrlValidator VALIDATOR = new UrlValidator((Boolean.parseBoolean(System.getProperty(ALLOW_LOCAL)) ? UrlValidator.ALLOW_LOCAL_URLS : 0) + UrlValidator.ALLOW_2_SLASHES) {
+        @Override
+        protected boolean isValidAuthority(String authority) {
+            if (authority != null) {
+                authority = authority.replace("_", "-");
+            }
+            return super.isValidAuthority(authority);
+        }
+    };
+
+    private static final Pattern DOUBLE_SLASH = Pattern.compile("([^:])//");
 
     @Override
     public boolean isSatisfied(final Object validatedObject, final Object value, final ValidationCycle cycle) throws OValException {
@@ -26,8 +43,28 @@ public class URLCheck extends AbstractAnnotationCheck<URL> {
             if (StringUtils.isBlank(url)) {
                 return true;
             } else {
-                return URLUtils.isValid(url);
+                return isValidUrl(url);
             }
         }
     }
+
+    public  boolean isValidUrl(String url) {
+        try {
+            if (url.startsWith("//")) {
+                url = "http:" + url;
+            } else if (url.startsWith("://")) {
+                url = "http" + url;
+            }
+
+            HttpUrl httpUrl = HttpUrl.parse(url);
+            return httpUrl != null && VALIDATOR.isValid(removeDoubleSlashesFromPath(httpUrl.uri().toString()));
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private static String removeDoubleSlashesFromPath(String url) {
+        return DOUBLE_SLASH.matcher(url).replaceAll("$1/");
+    }
+
 }

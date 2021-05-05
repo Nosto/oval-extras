@@ -9,12 +9,18 @@
  ******************************************************************************/
 package com.nosto.ovalextras.constraint;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class URLCheckTest extends AbstractContraintsTest {
+
+    @Before
+    public void setup() {
+        System.setProperty(URLCheck.ALLOW_LOCAL, "true");
+    }
 
     @Test
     public void isSatisfied() {
@@ -30,6 +36,15 @@ public class URLCheckTest extends AbstractContraintsTest {
         assertFalse(urlCheck.isSatisfied(null, "example.com", null));
         assertTrue(urlCheck.isSatisfied(null, "https://example.com", null));
         assertTrue(urlCheck.isSatisfied(null, "https://example.shop", null));
+    }
+
+    @Test
+    public void testWithLocalUrl() {
+
+        URLCheck urlCheck = new URLCheck();
+        super.testCheck(urlCheck);
+
+        assertTrue(urlCheck.isSatisfied(null, "http://localhost:8080", null));
     }
 
 }
