@@ -17,12 +17,12 @@ import net.sf.oval.ValidationCycle;
 import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
 import net.sf.oval.exception.OValException;
 
-public class VatIdCheck extends AbstractAnnotationCheck<VatId> {
+public class EUVatCheck extends AbstractAnnotationCheck<EUVat> {
 
     @Override
     public boolean isSatisfied(Object validatedObject, Object value, ValidationCycle validator) throws OValException {
         if (value == null) {
-            return false;
+            return true;
         } else {
             return isValid(value.toString());
         }
@@ -30,7 +30,7 @@ public class VatIdCheck extends AbstractAnnotationCheck<VatId> {
 
     private boolean isValid(String vat) {
         if (vat.isEmpty()) {
-            return false;
+            return true;
         }
 
         String countryVatCode = vat.substring(0, 2);

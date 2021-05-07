@@ -15,7 +15,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class VatIdCheckTest extends AbstractContraintsTest {
+public class EUVatCheckTest extends AbstractContraintsTest {
     private static final String NO_VAT = "";
     private static final String INVALID_VAT = "123";
     //ToDo double check if this should be public
@@ -23,7 +23,7 @@ public class VatIdCheckTest extends AbstractContraintsTest {
 
     @Test
     public void testWithNonEuCountry() {
-        VatIdCheck vatCheck = new VatIdCheck();
+        EUVatCheck vatCheck = new EUVatCheck();
         super.testCheck(vatCheck);
 
         assertTrue(vatCheck.isSatisfied(null , "US" + NO_VAT, null));
@@ -33,7 +33,7 @@ public class VatIdCheckTest extends AbstractContraintsTest {
 
     @Test
     public void testWithEuCountry() {
-        VatIdCheck vatCheck = new VatIdCheck();
+        EUVatCheck vatCheck = new EUVatCheck();
         super.testCheck(vatCheck);
 
         assertFalse(vatCheck.isSatisfied(null , "FI" + NO_VAT, null));
