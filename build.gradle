@@ -30,13 +30,21 @@ apply plugin: "com.dorongold.task-tree"
 apply plugin: "jacoco"
 
 group 'com.nosto'
-version '0.0.3'
+version '0.0.4'
 
 java {
     withJavadocJar()
     withSourcesJar()
     sourceCompatibility = JavaVersion.VERSION_1_9
     targetCompatibility = JavaVersion.VERSION_1_9
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDirs "src/main/resources"
+        }
+    }
 }
 
 compileJava.options.encoding = 'UTF-8'
