@@ -7,7 +7,6 @@ buildscript {
             google()
             mavenCentral()
             gradlePluginPortal()
-            jcenter()
         }
         dependencies {
             classpath "com.diffplug.spotless:spotless-plugin-gradle:5.12.4"
@@ -39,14 +38,6 @@ java {
     targetCompatibility = JavaVersion.VERSION_1_9
 }
 
-sourceSets {
-    main {
-        resources {
-            srcDirs "src/main/resources"
-        }
-    }
-}
-
 compileJava.options.encoding = 'UTF-8'
 
 tasks.withType(JavaCompile).configureEach {
@@ -61,7 +52,6 @@ tasks.withType(JavaCompile).configureEach {
 repositories {
     google()
     mavenCentral()
-    jcenter()
     maven {
         url 'https://dl.bintray.com/palantir/releases'
     }
