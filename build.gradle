@@ -7,7 +7,6 @@ buildscript {
             google()
             mavenCentral()
             gradlePluginPortal()
-            jcenter()
         }
         dependencies {
             classpath "com.diffplug.spotless:spotless-plugin-gradle:5.12.4"
@@ -53,7 +52,6 @@ tasks.withType(JavaCompile).configureEach {
 repositories {
     google()
     mavenCentral()
-    jcenter()
     maven {
         url 'https://dl.bintray.com/palantir/releases'
     }
