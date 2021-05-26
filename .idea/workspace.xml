@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9da7df8c-411d-4e5d-9177-d5356b029b03" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/resourceBundles.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/oval-extras.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/oval-extras.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/nosto/ovalextras/constraint/PhoneCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nosto/ovalextras/constraint/PhoneCheck.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +112,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/test/java/com/nosto/ovalextras" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -147,16 +145,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Gradle.PhoneCheckTest.testInvalidPhoneNumbers">
-    <configuration default="true" type="lua.app" factoryName="Lua Application">
-      <option name="program" value="lua" />
-      <option name="file" value="" />
-      <option name="workingDir" value="$PROJECT_DIR$/src/test/java" />
-      <option name="debuggerType" value="2" />
-      <option name="params" value="" />
-      <option name="charset" value="UTF-8" />
-      <option name="showConsole" value="true" />
-      <method v="2" />
-    </configuration>
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -169,6 +157,16 @@
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
+    </configuration>
+    <configuration default="true" type="lua.app" factoryName="Lua Application">
+      <option name="program" value="lua" />
+      <option name="file" value="" />
+      <option name="workingDir" value="$PROJECT_DIR$/src/test/java" />
+      <option name="debuggerType" value="2" />
+      <option name="params" value="" />
+      <option name="charset" value="UTF-8" />
+      <option name="showConsole" value="true" />
+      <method v="2" />
     </configuration>
     <configuration name="PhoneCheckTest.testInvalidPhoneNumbers" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
@@ -276,7 +274,6 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Gradle.Tests in 'com.nosto.ovalextras.constraint'" />
       <item itemvalue="Gradle.oval-extras [build]" />
       <item itemvalue="Gradle.VatIdCheckTest" />
       <item itemvalue="Gradle.VatIdCheckTest.testWithEuCountryVatValidationIgnored" />
