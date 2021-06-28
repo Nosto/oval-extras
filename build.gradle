@@ -14,6 +14,7 @@ buildscript {
             classpath "net.ltgt.gradle:gradle-errorprone-plugin:2.0.1"
             classpath "net.ltgt.gradle:gradle-nullaway-plugin:1.1.0"
             classpath "gradle.plugin.com.dorongold.plugins:task-tree:1.5"
+            classpath 'gradle.plugin.com.github.jengelman.gradle.plugins:shadow:7.0.0'
         }
     }
 }
@@ -27,6 +28,7 @@ apply plugin: 'net.ltgt.errorprone'
 apply plugin: 'net.ltgt.nullaway'
 apply plugin: "com.dorongold.task-tree"
 apply plugin: "jacoco"
+apply plugin: 'com.github.johnrengelman.shadow'
 
 group 'com.nosto'
 version '0.0.4'
@@ -48,16 +50,11 @@ tasks.withType(JavaCompile).configureEach {
     }
 }
 
-
 repositories {
-    google()
-    mavenCentral()
-    maven {
-        url 'https://dl.bintray.com/palantir/releases'
-    }
     maven {
         url 'https://maven.onehippo.com/maven2/'
     }
+    mavenCentral()
 }
 
 dependencies {
@@ -245,15 +242,25 @@ javadoc {
     }
 }
 
-//// Task for building the zip file for upload
-//task buildZip(type: Zip) {
-//    archiveBaseName.set(rootProject.name)
-//    from compileJava
-//    from processResources
-//    into('lib') {
-//        from configurations.runtime
-//    }
-//}
-//
-////noinspection GrUnresolvedAccess
-//build.dependsOn buildZip
+javadoc {
+    if (JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
+}
+
+// Task for building the zip file for upload
+task buildZip(type: Zip) {
+    zip64 = true
+    archiveBaseName.set(rootProject.name)
+    from compileJava
+    from processResources
+    into('lib') {
+        from configurations.runtimeClasspath
+    }
+}
+
+shadowJar {
+    zip64 true
+}
+
+build.dependsOn buildZip

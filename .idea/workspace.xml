@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9da7df8c-411d-4e5d-9177-d5356b029b03" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/oval-extras.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/oval-extras.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/oval-extras.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,6 +183,7 @@
             <option value=":test" />
           </list>
         </option>
+        <option name="tasksAndArguments" value=":test --tests &quot;com.nosto.ovalextras.constraint.PhoneCheckTest.testInvalidPhoneNumbers&quot;" />
         <option name="vmOptions" />
       </ExternalSystemSettings>
       <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
@@ -202,6 +205,7 @@
             <option value=":test" />
           </list>
         </option>
+        <option name="tasksAndArguments" value=":test --tests &quot;com.nosto.ovalextras.constraint.PhoneCheckTest.testValidPhoneNumbers&quot;" />
         <option name="vmOptions" />
       </ExternalSystemSettings>
       <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
@@ -223,6 +227,7 @@
             <option value=":test" />
           </list>
         </option>
+        <option name="tasksAndArguments" value=":test --tests &quot;com.nosto.ovalextras.constraint.VatIdCheckTest&quot;" />
         <option name="vmOptions" />
       </ExternalSystemSettings>
       <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
@@ -244,6 +249,7 @@
             <option value=":test" />
           </list>
         </option>
+        <option name="tasksAndArguments" value=":test --tests &quot;com.nosto.ovalextras.constraint.VatIdCheckTest.testWithEuCountryVatValidationIgnored&quot;" />
         <option name="vmOptions" />
       </ExternalSystemSettings>
       <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
@@ -265,6 +271,7 @@
             <option value="build" />
           </list>
         </option>
+        <option name="tasksAndArguments" value="build --stacktrace" />
         <option name="vmOptions" />
       </ExternalSystemSettings>
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
