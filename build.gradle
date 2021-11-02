@@ -1,63 +1,42 @@
 //file:noinspection GrUnresolvedAccess
-import net.ltgt.gradle.errorprone.CheckSeverity
+//file:noinspection GroovyAssignabilityCheck
+import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 buildscript {
-    buildscript {
-        repositories {
-            google()
-            mavenCentral()
-            gradlePluginPortal()
-        }
-        dependencies {
-            classpath "com.diffplug.spotless:spotless-plugin-gradle:5.12.4"
-            classpath "gradle.plugin.com.github.spotbugs.snom:spotbugs-gradle-plugin:4.7.1"
-            classpath "net.ltgt.gradle:gradle-errorprone-plugin:2.0.1"
-            classpath "net.ltgt.gradle:gradle-nullaway-plugin:1.1.0"
-            classpath "gradle.plugin.com.dorongold.plugins:task-tree:1.5"
-            classpath 'gradle.plugin.com.github.jengelman.gradle.plugins:shadow:7.0.0'
-        }
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
     }
 }
 
-apply plugin: 'java'
-apply plugin: 'checkstyle'
-apply plugin: "com.github.spotbugs"
-apply plugin: 'maven-publish'
-apply plugin: 'com.diffplug.spotless'
-apply plugin: 'net.ltgt.errorprone'
-apply plugin: 'net.ltgt.nullaway'
-apply plugin: "com.dorongold.task-tree"
-apply plugin: "jacoco"
-apply plugin: 'com.github.johnrengelman.shadow'
+plugins {
+    id 'java'
+    id 'checkstyle'
+    id 'maven-publish'
+    id 'java-library'
+    id "jacoco"
+    id "com.github.johnrengelman.shadow" version "7.1.0"
+    id 'com.diffplug.spotless' version '5.0.0'
+    id "com.github.spotbugs" version "4.7.1"
+    id "net.ltgt.errorprone" version "2.0.1"
+    id 'net.ltgt.nullaway' version "1.1.0"
+    id "com.dorongold.task-tree" version "1.5"
+}
 
 group 'com.nosto'
 version '0.0.4'
 
-java {
-    withJavadocJar()
-    withSourcesJar()
-    sourceCompatibility = JavaVersion.VERSION_1_9
-    targetCompatibility = JavaVersion.VERSION_1_9
-}
-
-compileJava.options.encoding = 'UTF-8'
-
-tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8'
-    options.errorprone.nullaway {
-        //noinspection GrUnresolvedAccess
-        severity = CheckSeverity.OFF
-    }
-}
-
 repositories {
+    mavenCentral()
     maven {
         url 'https://maven.onehippo.com/maven2/'
     }
-    mavenCentral()
 }
 
 dependencies {
+    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.2.0'
+    testRuntimeOnly group: 'org.junit.vintage', name: 'junit-vintage-engine', version: '5.2.0'
     implementation group: 'junit', name: 'junit', version: '4.12'
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.11.0'
     implementation group: 'javax.annotation', name: 'jsr305', version: '1.0'
@@ -88,6 +67,52 @@ nullaway {
     annotatedPackages.add("com.nosto")
 }
 
+// Configuration for the Jacoco plugin. It seems that it isn't possible to define
+// the output report formats here and those seem to be defined on the individual
+// task level.
+// I'm not sure why the tool version is defined here and it isn't managed as a
+// dependency.
+jacoco {
+    toolVersion = "0.8.5"
+}
+
+// We only need the XML report so that the CI tools can parse it. The HTML isn't needed.
+jacocoTestReport {
+    reports {
+        csv.enabled = true
+        xml.enabled = false
+        html.enabled = true
+    }
+}
+
+test {
+    useJUnitPlatform()
+    testLogging.events.addAll([TestLogEvent.PASSED, TestLogEvent.SKIPPED, TestLogEvent.FAILED])
+    reports {
+        junitXml.enabled = true
+        html.enabled = true
+    }
+    maxParallelForks = (int) (Runtime.runtime.availableProcessors() / 2 + 1)
+    finalizedBy jacocoTestReport // report is always generated after tests run
+}
+
+jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
+}
+
+javadoc {
+    options.addBooleanOption('html5', true)
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    archiveClassifier.set("sources")
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives sourcesJar
+}
+
 // Configuration for the Spotbugs plugin. It seems that it isn't possible to define
 // the output report formats here and those seem to be defined on the individual
 // task level.
@@ -98,7 +123,11 @@ spotbugs {
     toolVersion = '4.0.2'
     //noinspection GroovyAccessibility,GrFinalVariableAccess,GroovyAssignabilityCheck
     ignoreFailures = true
+    //noinspection GroovyAccessibility,GrFinalVariableAccess,GroovyAssignabilityCheck
     effort = 'max'
+    // Exclude all *.scala files as Spotbugs doesn't work too well with Scala.
+    //noinspection GroovyAccessibility,GrFinalVariableAccess,GroovyAssignabilityCheck
+    excludeFilter = file("$rootDir/gradle/config/spotbugs/exclude.xml")
 }
 
 // We only need the XML report so that the CI tools can parse it. The HTML isn't needed.
@@ -124,7 +153,7 @@ spotbugsTest {
 // dependency.
 checkstyle {
     toolVersion "7.6.1"
-    config resources.text.fromFile("config/checkstyle/checkstyle.xml")
+    config rootProject.resources.text.fromFile("gradle/config/checkstyle/checkstyle.xml")
 }
 
 // We only need the XML report so that the CI tools can parse it. The HTML isn't needed
@@ -144,45 +173,6 @@ checkstyleTest {
     }
 }
 
-// Configuration for the Jacoco plugin. It seems that it isn't possible to define
-// the output report formats here and those seem to be defined on the individual
-// task level.
-// I'm not sure why the tool version is defined here and it isn't managed as a
-// dependency.
-jacoco {
-    toolVersion = "0.8.5"
-}
-
-// We only need the XML report so that the CI tools can parse it. The HTML isn't needed.
-jacocoTestReport {
-    reports {
-        csv.enabled = true
-        xml.enabled = false
-        html.enabled = true
-    }
-}
-
-test {
-    //useJUnitPlatform()
-    testLogging {
-        //noinspection GrUnresolvedAccess
-        events "passed", "skipped", "failed"
-    }
-    reports {
-        junitXml.enabled = true
-        html.enabled = true
-    }
-    maxParallelForks = (int) (Runtime.runtime.availableProcessors() / 2 + 1)
-    finalizedBy jacocoTestReport // report is always generated after tests run
-}
-
-jacocoTestReport {
-    dependsOn test // tests are required to run before generating the report
-}
-
-// For a complete explanation of how this publishing is configured, please
-// refer to the Gradle Docs at:
-// https://docs.gradle.org/current/userguide/publishing_maven.html#publishing_maven:complete_example
 publishing {
     repositories {
         maven {
@@ -194,17 +184,6 @@ publishing {
     publications {
         //noinspection GroovyAssignabilityCheck
         mavenJava(MavenPublication) {
-            versionMapping {
-                //noinspection GroovyAssignabilityCheck
-                usage('java-api') {
-                    //noinspection GroovyAssignabilityCheck
-                    fromResolutionOf('runtimeClasspath')
-                }
-                //noinspection GroovyAssignabilityCheck
-                usage('java-runtime') {
-                    fromResolutionResult()
-                }
-            }
             //noinspection GroovyAssignabilityCheck
             from components.java
 
@@ -221,6 +200,36 @@ publishing {
                         name = 'The Apache License, Version 2.0'
                         //noinspection GroovyAssignabilityCheck
                         url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
+                        //noinspection GroovyAssignabilityCheck
+                        distribution = 'repo'
+                    }
+                }
+                developers {
+                    developer {
+                        //noinspection GroovyAssignabilityCheck
+                        id = 'olsi-qose'
+                        //noinspection GroovyAssignabilityCheck
+                        name = 'Olsi Qose'
+                        //noinspection GroovyAssignabilityCheck
+                        email = 'olsi.qose@nosto.com'
+                    }
+                }
+                contributors {
+                    developer {
+                        //noinspection GroovyAssignabilityCheck
+                        id = 'gary-nosto'
+                        //noinspection GroovyAssignabilityCheck
+                        name = 'Gary Madden'
+                        //noinspection GroovyAssignabilityCheck
+                        email = 'gary.madden@nosto.com'
+                    }
+                    contributor {
+                        //noinspection GroovyAssignabilityCheck
+                        id = 'mridang'
+                        //noinspection GroovyAssignabilityCheck
+                        name = 'Mridang Agarwalla'
+                        //noinspection GroovyAssignabilityCheck
+                        email = 'mridang.agarwalla@osto.com'
                     }
                 }
                 scm {
@@ -231,20 +240,14 @@ publishing {
                     //noinspection GroovyAssignabilityCheck
                     url = 'https://github.com/nosto/oval-extras'
                 }
+                issueManagement {
+                    //noinspection GroovyAssignabilityCheck
+                    system = "Github"
+                    //noinspection GroovyAssignabilityCheck
+                    url = "https://github.com/nosto/oval-extras/issues"
+                }
             }
         }
-    }
-}
-
-javadoc {
-    if (JavaVersion.current().isJava9Compatible()) {
-        options.addBooleanOption('html5', true)
-    }
-}
-
-javadoc {
-    if (JavaVersion.current().isJava9Compatible()) {
-        options.addBooleanOption('html5', true)
     }
 }
 
