@@ -25,7 +25,7 @@ plugins {
 }
 
 group 'com.nosto'
-version '0.0.6'
+version '0.0.7'
 
 repositories {
     mavenCentral()
@@ -109,8 +109,9 @@ task sourcesJar(type: Jar, dependsOn: classes) {
     from sourceSets.main.allSource
 }
 
-artifacts {
-    archives sourcesJar
+java {
+    withSourcesJar()
+    withJavadocJar()
 }
 
 // Configuration for the Spotbugs plugin. It seems that it isn't possible to define
@@ -186,9 +187,6 @@ publishing {
         maven(MavenPublication) {
             //noinspection GroovyAssignabilityCheck
             from components.java
-
-            //noinspection GroovyAssignabilityCheck
-            artifact sourcesJar
 
             pom {
                 //noinspection GroovyAssignabilityCheck
