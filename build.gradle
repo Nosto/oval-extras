@@ -183,9 +183,12 @@ publishing {
     }
     publications {
         //noinspection GroovyAssignabilityCheck
-        mavenJava(MavenPublication) {
+        maven(MavenPublication) {
             //noinspection GroovyAssignabilityCheck
             from components.java
+
+            //noinspection GroovyAssignabilityCheck
+            artifact sourcesJar
 
             pom {
                 //noinspection GroovyAssignabilityCheck
