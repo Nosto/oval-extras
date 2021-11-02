@@ -216,7 +216,7 @@ publishing {
                     }
                 }
                 contributors {
-                    developer {
+                    contributor {
                         //noinspection GroovyAssignabilityCheck
                         id = 'gary-nosto'
                         //noinspection GroovyAssignabilityCheck
