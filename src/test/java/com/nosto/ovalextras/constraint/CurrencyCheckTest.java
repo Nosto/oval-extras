@@ -10,12 +10,12 @@
 
 package com.nosto.ovalextras.constraint;
 
-import org.junit.Test;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Currency;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import org.junit.Test;
 
 public class CurrencyCheckTest extends AbstractContraintsTest {
 
@@ -24,10 +24,10 @@ public class CurrencyCheckTest extends AbstractContraintsTest {
         CurrencyCheck currencyCheck = new CurrencyCheck();
         super.testCheck(currencyCheck);
 
-        assertTrue(currencyCheck.isSatisfied(null, Currency.getInstance("ALL").getCurrencyCode(), null));
-        assertTrue(currencyCheck.isSatisfied(null, Currency.getInstance("EUR").getCurrencyCode(), null));
-        assertTrue(currencyCheck.isSatisfied(null, Currency.getInstance("USD").getCurrencyCode(), null));
-        assertTrue(currencyCheck.isSatisfied(null, Currency.getInstance("JPY").getCurrencyCode(), null));
+        assertTrue(currencyCheck.isSatisfied(new Object(), Currency.getInstance("ALL").getCurrencyCode(), null));
+        assertTrue(currencyCheck.isSatisfied(new Object(), Currency.getInstance("EUR").getCurrencyCode(), null));
+        assertTrue(currencyCheck.isSatisfied(new Object(), Currency.getInstance("USD").getCurrencyCode(), null));
+        assertTrue(currencyCheck.isSatisfied(new Object(), Currency.getInstance("JPY").getCurrencyCode(), null));
     }
 
     @Test
@@ -35,8 +35,8 @@ public class CurrencyCheckTest extends AbstractContraintsTest {
         CurrencyCheck currencyCheck = new CurrencyCheck();
         super.testCheck(currencyCheck);
 
-        assertFalse(currencyCheck.isSatisfied(null, "euro", null));
-        assertFalse(currencyCheck.isSatisfied(null, "dollar", null));
-        assertFalse(currencyCheck.isSatisfied(null, "$", null));
+        assertFalse(currencyCheck.isSatisfied(new Object(), "euro", null));
+        assertFalse(currencyCheck.isSatisfied(new Object(), "dollar", null));
+        assertFalse(currencyCheck.isSatisfied(new Object(), "$", null));
     }
 }

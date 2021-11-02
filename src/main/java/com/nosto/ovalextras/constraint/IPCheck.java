@@ -9,24 +9,28 @@
  ******************************************************************************/
 package com.nosto.ovalextras.constraint;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.annotation.Nullable;
+
 import com.google.common.net.InetAddresses;
+
 import net.sf.oval.ValidationCycle;
 import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
 import net.sf.oval.exception.OValException;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class IPCheck extends AbstractAnnotationCheck<IP> {
 
     /**
      * Checks the all the addresses are valid IP addresses. It iterates over
      * each item in the set in uses the Google Commons validator to check them
+     *
      * @param value value
      * @return boolean
      */
     @SuppressWarnings({"UnstableApiUsage", "unchecked", "IfStatementWithIdenticalBranches"})
-    public boolean isSatisfied(Object value) {
+    public boolean isSatisfied(@Nullable Object value) {
         if (value == null) {
             return true;
         } else {
@@ -41,7 +45,7 @@ public class IPCheck extends AbstractAnnotationCheck<IP> {
     }
 
     @Override
-    public boolean isSatisfied(final Object validatedObject, final Object value, final ValidationCycle cycle) throws OValException {
+    public boolean isSatisfied(final Object validatedObject, @Nullable final Object value, @Nullable ValidationCycle cycle) throws OValException {
         return isSatisfied(value);
     }
 }

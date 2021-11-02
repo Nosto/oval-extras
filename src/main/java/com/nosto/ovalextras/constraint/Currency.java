@@ -10,9 +10,13 @@
 
 package com.nosto.ovalextras.constraint;
 
-import net.sf.oval.configuration.annotation.Constraint;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-import java.lang.annotation.*;
+import net.sf.oval.configuration.annotation.Constraint;
 
 /**
  * Checks if the value given is a correct currency format

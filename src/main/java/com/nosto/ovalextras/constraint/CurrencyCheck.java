@@ -9,6 +9,8 @@
  ******************************************************************************/
 package com.nosto.ovalextras.constraint;
 
+import javax.annotation.Nullable;
+
 import net.sf.oval.ValidationCycle;
 import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
 import net.sf.oval.exception.OValException;
@@ -25,7 +27,7 @@ public class CurrencyCheck extends AbstractAnnotationCheck<Currency> {
     }
 
     @Override
-    public boolean isSatisfied(final Object validatedObject, final Object value, final ValidationCycle cycle) throws OValException {
+    public boolean isSatisfied(final Object validatedObject, final Object value, @Nullable final ValidationCycle cycle) throws OValException {
         if (value == null) {
             return true;
         } else {

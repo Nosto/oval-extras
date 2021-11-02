@@ -9,11 +9,11 @@
  ******************************************************************************/
 package com.nosto.ovalextras.constraint;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import org.junit.Before;
+import org.junit.Test;
 
 public class URLCheckTest extends AbstractContraintsTest {
 
@@ -27,15 +27,15 @@ public class URLCheckTest extends AbstractContraintsTest {
         URLCheck urlCheck = new URLCheck();
         super.testCheck(urlCheck);
 
-        assertTrue(urlCheck.isSatisfied(null, "//example.dev", null));
-        assertFalse(urlCheck.isSatisfied(null, "//example.test", null));
-        assertFalse(urlCheck.isSatisfied(null, "//example.local", null));
-        assertFalse(urlCheck.isSatisfied(null, "//example.invalid", null));
-        assertFalse(urlCheck.isSatisfied(null, "//example.example", null));
-        assertTrue(urlCheck.isSatisfied(null, "//example.shop", null));
-        assertFalse(urlCheck.isSatisfied(null, "example.com", null));
-        assertTrue(urlCheck.isSatisfied(null, "https://example.com", null));
-        assertTrue(urlCheck.isSatisfied(null, "https://example.shop", null));
+        assertTrue(urlCheck.isSatisfied(new Object(), "//example.dev", null));
+        assertFalse(urlCheck.isSatisfied(new Object(), "//example.test", null));
+        assertFalse(urlCheck.isSatisfied(new Object(), "//example.local", null));
+        assertFalse(urlCheck.isSatisfied(new Object(), "//example.invalid", null));
+        assertFalse(urlCheck.isSatisfied(new Object(), "//example.example", null));
+        assertTrue(urlCheck.isSatisfied(new Object(), "//example.shop", null));
+        assertFalse(urlCheck.isSatisfied(new Object(), "example.com", null));
+        assertTrue(urlCheck.isSatisfied(new Object(), "https://example.com", null));
+        assertTrue(urlCheck.isSatisfied(new Object(), "https://example.shop", null));
     }
 
     @Test
@@ -44,7 +44,7 @@ public class URLCheckTest extends AbstractContraintsTest {
         URLCheck urlCheck = new URLCheck();
         super.testCheck(urlCheck);
 
-        assertTrue(urlCheck.isSatisfied(null, "http://localhost:8080", null));
+        assertTrue(urlCheck.isSatisfied(new Object(), "http://localhost:8080", null));
     }
 
 }

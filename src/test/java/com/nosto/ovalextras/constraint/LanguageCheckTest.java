@@ -9,10 +9,12 @@
  */
 package com.nosto.ovalextras.constraint;
 
-import org.junit.Test;
-import java.util.Locale;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import java.util.Locale;
+
+import org.junit.Test;
 
 public class LanguageCheckTest extends AbstractContraintsTest {
 
@@ -21,9 +23,9 @@ public class LanguageCheckTest extends AbstractContraintsTest {
         LanguageCheck languageCheck = new LanguageCheck();
         super.testCheck(languageCheck);
 
-        assertTrue(languageCheck.isSatisfied(null, new Locale("en").getLanguage(), null));
-        assertTrue(languageCheck.isSatisfied(null, new Locale("fi").getLanguage(), null));
-        assertTrue(languageCheck.isSatisfied(null, new Locale("it").getLanguage(), null));
+        assertTrue(languageCheck.isSatisfied(new Object(), new Locale("en").getLanguage(), null));
+        assertTrue(languageCheck.isSatisfied(new Object(), new Locale("fi").getLanguage(), null));
+        assertTrue(languageCheck.isSatisfied(new Object(), new Locale("it").getLanguage(), null));
     }
 
     @Test
@@ -31,7 +33,7 @@ public class LanguageCheckTest extends AbstractContraintsTest {
         LanguageCheck languageCheck = new LanguageCheck();
         super.testCheck(languageCheck);
 
-        assertFalse(languageCheck.isSatisfied(null, "english", null));
-        assertFalse(languageCheck.isSatisfied(null, "", null));
+        assertFalse(languageCheck.isSatisfied(new Object(), "english", null));
+        assertFalse(languageCheck.isSatisfied(new Object(), "", null));
     }
 }

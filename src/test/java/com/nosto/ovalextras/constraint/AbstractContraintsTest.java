@@ -4,9 +4,9 @@
  */
 package com.nosto.ovalextras.constraint;
 
-import net.sf.oval.Check;
-
 import static org.assertj.core.api.Assertions.assertThat;
+
+import net.sf.oval.Check;
 
 /**
  * @author Sebastian Thomschke

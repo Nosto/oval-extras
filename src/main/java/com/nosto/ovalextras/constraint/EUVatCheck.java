@@ -10,9 +10,12 @@
 
 package com.nosto.ovalextras.constraint;
 
+import javax.annotation.Nullable;
+
+import com.google.common.collect.ImmutableSet;
+
 import ch.digitalfondue.vatchecker.EUVatCheckResponse;
 import ch.digitalfondue.vatchecker.EUVatChecker;
-import com.google.common.collect.ImmutableSet;
 import net.sf.oval.ValidationCycle;
 import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
 import net.sf.oval.exception.OValException;
@@ -20,7 +23,7 @@ import net.sf.oval.exception.OValException;
 public class EUVatCheck extends AbstractAnnotationCheck<EUVat> {
 
     @Override
-    public boolean isSatisfied(Object validatedObject, Object value, ValidationCycle validator) throws OValException {
+    public boolean isSatisfied(Object validatedObject, Object value, @Nullable ValidationCycle validator) throws OValException {
         if (value == null) {
             return true;
         } else {

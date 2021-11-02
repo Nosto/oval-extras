@@ -9,16 +9,7 @@
  */
 package com.nosto.ovalextras;
 
-import net.sf.oval.AbstractCheck;
-import net.sf.oval.Validator;
-import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
-import net.sf.oval.localization.message.ResourceBundleMessageResolver;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ErrorCollector;
-import org.reflections.Reflections;
-import org.reflections.util.ClasspathHelper;
-import org.reflections.util.ConfigurationBuilder;
+import static org.hamcrest.Matchers.notNullValue;
 
 import java.lang.reflect.Modifier;
 import java.util.Locale;
@@ -26,7 +17,17 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static org.hamcrest.Matchers.notNullValue;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ErrorCollector;
+import org.reflections.Reflections;
+import org.reflections.util.ClasspathHelper;
+import org.reflections.util.ConfigurationBuilder;
+
+import net.sf.oval.AbstractCheck;
+import net.sf.oval.Validator;
+import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
+import net.sf.oval.localization.message.ResourceBundleMessageResolver;
 
 public class ValidationMessagesTest {
 

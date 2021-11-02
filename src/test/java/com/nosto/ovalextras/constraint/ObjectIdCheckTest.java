@@ -10,11 +10,11 @@
 
 package com.nosto.ovalextras.constraint;
 
-import org.bson.types.ObjectId;
-import org.junit.Test;
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import org.bson.types.ObjectId;
+import org.junit.Test;
 
 public class ObjectIdCheckTest extends AbstractContraintsTest {
 
@@ -23,7 +23,7 @@ public class ObjectIdCheckTest extends AbstractContraintsTest {
         ObjectIdCheck objectIdCheck = new ObjectIdCheck();
         super.testCheck(objectIdCheck);
 
-        assertTrue(objectIdCheck.isSatisfied(null, ObjectId.get(), null));
+        assertTrue(objectIdCheck.isSatisfied(new Object(), ObjectId.get(), null));
     }
 
     @Test
@@ -31,8 +31,8 @@ public class ObjectIdCheckTest extends AbstractContraintsTest {
         ObjectIdCheck objectIdCheck = new ObjectIdCheck();
         super.testCheck(objectIdCheck);
 
-        assertFalse(objectIdCheck.isSatisfied(null, "12324", null));
-        assertFalse(objectIdCheck.isSatisfied(null, "", null));
-        assertFalse(objectIdCheck.isSatisfied(null, "someObjectId", null));
+        assertFalse(objectIdCheck.isSatisfied(new Object(), "12324", null));
+        assertFalse(objectIdCheck.isSatisfied(new Object(), "", null));
+        assertFalse(objectIdCheck.isSatisfied(new Object(), "someObjectId", null));
     }
 }

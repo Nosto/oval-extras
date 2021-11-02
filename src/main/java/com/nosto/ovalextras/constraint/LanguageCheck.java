@@ -9,12 +9,15 @@
  ******************************************************************************/
 package com.nosto.ovalextras.constraint;
 
+import java.util.Locale;
+
+import javax.annotation.Nullable;
+
 import com.google.common.collect.ImmutableList;
+
 import net.sf.oval.ValidationCycle;
 import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
 import net.sf.oval.exception.OValException;
-
-import java.util.Locale;
 
 public class LanguageCheck extends AbstractAnnotationCheck<Language> {
 
@@ -25,7 +28,7 @@ public class LanguageCheck extends AbstractAnnotationCheck<Language> {
     }
 
     @Override
-    public boolean isSatisfied(final Object validatedObject, final Object value, final ValidationCycle cycle) throws OValException {
+    public boolean isSatisfied(final Object validatedObject, final Object value, @Nullable final ValidationCycle cycle) throws OValException {
         if (value == null) {
             return true;
         } else {

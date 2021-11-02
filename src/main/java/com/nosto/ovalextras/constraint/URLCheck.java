@@ -9,14 +9,17 @@
  ******************************************************************************/
 package com.nosto.ovalextras.constraint;
 
+import java.util.regex.Pattern;
+
+import javax.annotation.Nullable;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.validator.routines.UrlValidator;
+
 import net.sf.oval.ValidationCycle;
 import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
 import net.sf.oval.exception.OValException;
 import okhttp3.HttpUrl;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.validator.routines.UrlValidator;
-
-import java.util.regex.Pattern;
 
 public class URLCheck extends AbstractAnnotationCheck<URL> {
 
@@ -34,8 +37,12 @@ public class URLCheck extends AbstractAnnotationCheck<URL> {
 
     private static final Pattern DOUBLE_SLASH = Pattern.compile("([^:])//");
 
+    private static String removeDoubleSlashesFromPath(String url) {
+        return DOUBLE_SLASH.matcher(url).replaceAll("$1/");
+    }
+
     @Override
-    public boolean isSatisfied(final Object validatedObject, final Object value, final ValidationCycle cycle) throws OValException {
+    public boolean isSatisfied(final Object validatedObject, final Object value, @Nullable final ValidationCycle cycle) throws OValException {
         if (value == null) {
             return true;
         } else {
@@ -48,7 +55,7 @@ public class URLCheck extends AbstractAnnotationCheck<URL> {
         }
     }
 
-    public  boolean isValidUrl(String url) {
+    public boolean isValidUrl(String url) {
         try {
             if (url.startsWith("//")) {
                 url = "http:" + url;
@@ -61,10 +68,6 @@ public class URLCheck extends AbstractAnnotationCheck<URL> {
         } catch (Exception e) {
             return false;
         }
-    }
-
-    private static String removeDoubleSlashesFromPath(String url) {
-        return DOUBLE_SLASH.matcher(url).replaceAll("$1/");
     }
 
 }

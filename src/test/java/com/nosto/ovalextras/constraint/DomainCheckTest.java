@@ -10,10 +10,10 @@
 
 package com.nosto.ovalextras.constraint;
 
-import org.junit.Test;
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
 
 public class DomainCheckTest extends AbstractContraintsTest {
 
@@ -22,8 +22,8 @@ public class DomainCheckTest extends AbstractContraintsTest {
         DomainCheck domainCheck = new DomainCheck();
         super.testCheck(domainCheck);
 
-        assertTrue(domainCheck.isSatisfied(null, "domain.com", null));
-        assertTrue(domainCheck.isSatisfied(null, "domain.com/", null));
+        assertTrue(domainCheck.isSatisfied(new Object(), "domain.com", null));
+        assertTrue(domainCheck.isSatisfied(new Object(), "domain.com/", null));
     }
 
     @Test
@@ -31,7 +31,7 @@ public class DomainCheckTest extends AbstractContraintsTest {
         DomainCheck domainCheck = new DomainCheck();
         super.testCheck(domainCheck);
 
-        assertFalse(domainCheck.isSatisfied(null, "domain", null));
-        assertFalse(domainCheck.isSatisfied(null, "domain@com", null));
+        assertFalse(domainCheck.isSatisfied(new Object(), "domain", null));
+        assertFalse(domainCheck.isSatisfied(new Object(), "domain@com", null));
     }
 }

@@ -9,18 +9,21 @@
  ******************************************************************************/
 package com.nosto.ovalextras.constraint;
 
+import java.util.Locale;
+import java.util.Set;
+
+import javax.annotation.Nullable;
+
 import com.google.common.collect.Sets;
+
 import net.sf.oval.ValidationCycle;
 import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
 import net.sf.oval.exception.OValException;
 
-import java.util.Locale;
-import java.util.Set;
-
 public class CountryCheck extends AbstractAnnotationCheck<Country> {
 
     @Override
-    public boolean isSatisfied(final Object validatedObject, final Object value, final ValidationCycle cycle) throws OValException {
+    public boolean isSatisfied(final Object validatedObject, final Object value, @Nullable final ValidationCycle cycle) throws OValException {
         if (value == null) {
             return true;
         } else {

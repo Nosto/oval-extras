@@ -9,10 +9,12 @@
  */
 package com.nosto.ovalextras.constraint;
 
-import org.junit.Test;
-import java.util.Locale;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import java.util.Locale;
+
+import org.junit.Test;
 
 public class CountryCheckTest extends AbstractContraintsTest {
 
@@ -21,10 +23,10 @@ public class CountryCheckTest extends AbstractContraintsTest {
         CountryCheck countryCheck = new CountryCheck();
         super.testCheck(countryCheck);
 
-        assertTrue(countryCheck.isSatisfied(null, new Locale("", "AL").getCountry() , null));
-        assertTrue(countryCheck.isSatisfied(null, new Locale("", "IT").getCountry() , null));
-        assertTrue(countryCheck.isSatisfied(null, new Locale("", "FI").getCountry() , null));
-        assertTrue(countryCheck.isSatisfied(null, new Locale("", "CH").getCountry() , null));
+        assertTrue(countryCheck.isSatisfied(new Object(), new Locale("", "AL").getCountry(), null));
+        assertTrue(countryCheck.isSatisfied(new Object(), new Locale("", "IT").getCountry(), null));
+        assertTrue(countryCheck.isSatisfied(new Object(), new Locale("", "FI").getCountry(), null));
+        assertTrue(countryCheck.isSatisfied(new Object(), new Locale("", "CH").getCountry(), null));
     }
 
     @Test
@@ -32,9 +34,9 @@ public class CountryCheckTest extends AbstractContraintsTest {
         CountryCheck countryCheck = new CountryCheck();
         super.testCheck(countryCheck);
 
-        assertFalse(countryCheck.isSatisfied(null, "NoWhere" , null));
-        assertFalse(countryCheck.isSatisfied(null, "Somewhere" , null));
-        assertFalse(countryCheck.isSatisfied(null, "" , null));
-        assertFalse(countryCheck.isSatisfied(null, "ZZ" , null));
+        assertFalse(countryCheck.isSatisfied(new Object(), "NoWhere", null));
+        assertFalse(countryCheck.isSatisfied(new Object(), "Somewhere", null));
+        assertFalse(countryCheck.isSatisfied(new Object(), "", null));
+        assertFalse(countryCheck.isSatisfied(new Object(), "ZZ", null));
     }
 }

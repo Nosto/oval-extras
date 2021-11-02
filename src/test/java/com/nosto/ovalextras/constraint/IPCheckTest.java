@@ -9,16 +9,16 @@
  ******************************************************************************/
 package com.nosto.ovalextras.constraint;
 
-import org.junit.Test;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import org.junit.Test;
 
 /**
- * Tests to check that the validation class for Play that validates the 
+ * Tests to check that the validation class for Play that validates the
  * list of ignored IP addresses.
  *
  * @author mridang
@@ -33,8 +33,8 @@ public class IPCheckTest extends AbstractContraintsTest {
         IPCheck addressChecker = new IPCheck();
         super.testCheck(addressChecker);
 
-        assertTrue(addressChecker.isSatisfied(null, null, null));
-        assertTrue(addressChecker.isSatisfied(null, new HashSet<String>(), null));
+        assertTrue(addressChecker.isSatisfied(new Object(), null, null));
+        assertTrue(addressChecker.isSatisfied(new Object(), new HashSet<String>(), null));
     }
 
     /**
@@ -47,12 +47,12 @@ public class IPCheckTest extends AbstractContraintsTest {
 
         Set<String> ignoredAddresses = new HashSet<>();
         ignoredAddresses.add("0.0.0.0");
-        assertTrue(addressChecker.isSatisfied(null, ignoredAddresses, null));
+        assertTrue(addressChecker.isSatisfied(new Object(), ignoredAddresses, null));
         ignoredAddresses.add("127.0.0.1");
-        assertTrue(addressChecker.isSatisfied(null, ignoredAddresses, null));
+        assertTrue(addressChecker.isSatisfied(new Object(), ignoredAddresses, null));
         ignoredAddresses.add("255.255.255.255");
-        assertTrue(addressChecker.isSatisfied(null, ignoredAddresses, null));
+        assertTrue(addressChecker.isSatisfied(new Object(), ignoredAddresses, null));
         ignoredAddresses.add("256.256.256.256.256");
-        assertFalse(addressChecker.isSatisfied(null, ignoredAddresses, null));
+        assertFalse(addressChecker.isSatisfied(new Object(), ignoredAddresses, null));
     }
 }

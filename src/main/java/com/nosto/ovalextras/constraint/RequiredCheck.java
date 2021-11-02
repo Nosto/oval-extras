@@ -9,10 +9,10 @@
  ******************************************************************************/
 package com.nosto.ovalextras.constraint;
 
+import java.util.Collection;
+
 import net.sf.oval.ValidationCycle;
 import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
-
-import java.util.Collection;
 
 @SuppressWarnings("unused")
 public class RequiredCheck extends AbstractAnnotationCheck<Required> {

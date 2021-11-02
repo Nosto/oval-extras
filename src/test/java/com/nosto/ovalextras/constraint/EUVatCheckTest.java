@@ -10,10 +10,10 @@
 
 package com.nosto.ovalextras.constraint;
 
-import org.junit.Test;
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
 
 public class EUVatCheckTest extends AbstractContraintsTest {
     private static final String NO_VAT = "";
@@ -26,9 +26,9 @@ public class EUVatCheckTest extends AbstractContraintsTest {
         EUVatCheck vatCheck = new EUVatCheck();
         super.testCheck(vatCheck);
 
-        assertTrue(vatCheck.isSatisfied(null , "US" + NO_VAT, null));
-        assertTrue(vatCheck.isSatisfied(null , "US" + INVALID_VAT, null));
-        assertTrue(vatCheck.isSatisfied(null , "US" + VALID_FINNISH_VAT_CODE, null));
+        assertTrue(vatCheck.isSatisfied(new Object(), "US" + NO_VAT, null));
+        assertTrue(vatCheck.isSatisfied(new Object(), "US" + INVALID_VAT, null));
+        assertTrue(vatCheck.isSatisfied(new Object(), "US" + VALID_FINNISH_VAT_CODE, null));
     }
 
     @Test
@@ -36,9 +36,9 @@ public class EUVatCheckTest extends AbstractContraintsTest {
         EUVatCheck vatCheck = new EUVatCheck();
         super.testCheck(vatCheck);
 
-        assertFalse(vatCheck.isSatisfied(null , "FI" + NO_VAT, null));
-        assertFalse(vatCheck.isSatisfied(null , "FI" + INVALID_VAT, null));
-        assertTrue(vatCheck.isSatisfied(null , "FI" + VALID_FINNISH_VAT_CODE,  null));
+        assertFalse(vatCheck.isSatisfied(new Object(), "FI" + NO_VAT, null));
+        assertFalse(vatCheck.isSatisfied(new Object(), "FI" + INVALID_VAT, null));
+        assertTrue(vatCheck.isSatisfied(new Object(), "FI" + VALID_FINNISH_VAT_CODE, null));
     }
 
 }

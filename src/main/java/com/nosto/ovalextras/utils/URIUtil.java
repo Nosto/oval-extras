@@ -9,24 +9,23 @@
  ******************************************************************************/
 package com.nosto.ovalextras.utils;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.validator.routines.DomainValidator;
-
-import javax.annotation.Nullable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Objects;
 
+import javax.annotation.Nullable;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.validator.routines.DomainValidator;
+
 /**
  * @author stephenfenech
- *
  */
 public final class URIUtil {
 
     private URIUtil() {}
 
     /**
-     *
      * @param uri uri
      * @return domain name without the subdomain 'www'
      */

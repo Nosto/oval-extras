@@ -9,17 +9,18 @@
  ******************************************************************************/
 package com.nosto.ovalextras.constraint;
 
+import java.util.Arrays;
+import java.util.Map;
+
 import net.sf.oval.ValidationCycle;
 import net.sf.oval.Validator;
 import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
 import net.sf.oval.exception.OValException;
 
-import java.util.Arrays;
-import java.util.Map;
-
 @SuppressWarnings("unused")
 public class ContainsCheck extends AbstractAnnotationCheck<Contains> {
 
+    @SuppressWarnings("NullAway")
     private String[] values;
 
     @Override

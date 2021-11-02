@@ -9,9 +9,12 @@
  ******************************************************************************/
 package com.nosto.ovalextras.constraint;
 
+import javax.annotation.Nullable;
+
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
+
 import net.sf.oval.ValidationCycle;
 import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
 import net.sf.oval.exception.OValException;
@@ -19,7 +22,7 @@ import net.sf.oval.exception.OValException;
 public class PhoneCheck extends AbstractAnnotationCheck<Phone> {
 
     @Override
-    public boolean isSatisfied(final Object validatedObject, final Object value, final ValidationCycle cycle) throws OValException {
+    public boolean isSatisfied(final Object validatedObject, final Object value, @Nullable final ValidationCycle cycle) throws OValException {
         if (value == null) {
             return true;
         } else {
