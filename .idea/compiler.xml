@@ -35,6 +35,6 @@
         <module name="oval-extras.test" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.9" />
+    <bytecodeTargetLevel target="11" />
   </component>
 </project>
