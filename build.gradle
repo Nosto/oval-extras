@@ -1,6 +1,5 @@
 plugins {
     id 'myproject.java-conventions'
-    id 'com.autonomousapps.dependency-analysis' version '2.0.0'
 }
 
 group 'com.nosto'
