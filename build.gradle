@@ -38,7 +38,7 @@ dependencies {
 publishing {
     repositories {
         maven {
-            name = 'GitHub Packages'
+            name = 'GitHubPackages'
             url = uri('https://maven.pkg.github.com/nosto/oval-extras')
             credentials {
                 username = System.getenv('GITHUB_ACTOR')
