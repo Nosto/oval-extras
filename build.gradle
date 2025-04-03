@@ -53,7 +53,7 @@ publishing {
                 //noinspection GroovyAssignabilityCheck
                 name = 'Oval Extras'
                 //noinspection GroovyAssignabilityCheck
-                description = 'A simple library to sanity-check your bean ser-deser'
+                description = 'Oval extras is based on OVal and brings a few more validation constraints on top of it'
                 //noinspection GroovyAssignabilityCheck
                 url = 'https://github.com/nosto/oval-extras'
                 licenses {
@@ -92,6 +92,14 @@ publishing {
                         name = 'Mridang Agarwalla'
                         //noinspection GroovyAssignabilityCheck
                         email = 'mridang.agarwalla@osto.com'
+                    }
+                    contributor {
+                        //noinspection GroovyAssignabilityCheck
+                        id = 'valto23'
+                        //noinspection GroovyAssignabilityCheck
+                        name = 'Vladimir Siutkin'
+                        //noinspection GroovyAssignabilityCheck
+                        email = 'vladimir.siutkin@osto.com'
                     }
                 }
                 scm {
