@@ -102,8 +102,8 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 }
 
 java {
-    sourceCompatibility '17'
-    targetCompatibility '17'
+    sourceCompatibility '11'
+    targetCompatibility '11'
     withSourcesJar()
     withJavadocJar()
 }
