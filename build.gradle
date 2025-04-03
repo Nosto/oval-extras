@@ -6,8 +6,8 @@ group 'com.nosto'
 version '0.0.9'
 
 java {
-    sourceCompatibility "11"
-    targetCompatibility "11"
+    sourceCompatibility '11'
+    targetCompatibility '11'
 }
 
 dependencies {
@@ -38,9 +38,12 @@ dependencies {
 publishing {
     repositories {
         maven {
-            name = "github"
-            url = uri("https://maven.pkg.github.com/nosto/oval-extras")
-            credentials(PasswordCredentials)
+            name = 'GitHub Packages'
+            url = uri('https://maven.pkg.github.com/nosto/oval-extras')
+            credentials {
+                username = System.getenv('GITHUB_ACTOR')
+                password = System.getenv('GITHUB_TOKEN')
+            }
         }
     }
     publications {
@@ -112,9 +115,9 @@ publishing {
                 }
                 issueManagement {
                     //noinspection GroovyAssignabilityCheck
-                    system = "Github"
+                    system = 'Github'
                     //noinspection GroovyAssignabilityCheck
-                    url = "https://github.com/nosto/oval-extras/issues"
+                    url = 'https://github.com/nosto/oval-extras/issues'
                 }
             }
         }
