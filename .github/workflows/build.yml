@@ -31,7 +31,7 @@ jobs:
           report_paths: ./build/test-results/test/*.xml
 
       - name: Archive build output
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: gradle-build
           path: build
