@@ -35,7 +35,7 @@ jobs:
       - name: Get package version id
         uses: castlabs/get-package-version-id-action@v2.0
         with:
-          version: ${{ env.VERSION }}
+          version: "${{ env.VERSION }}"
 
       - name: Delete existing package, if any
         if: ${{ steps.version.outputs.ids != '' }}
