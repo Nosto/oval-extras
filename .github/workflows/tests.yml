@@ -11,11 +11,11 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 11
-          distribution: temurin
+          java-version: '11'
+          distribution: 'temurin'
 
       - name: Setup and execute Gradle 'test' task
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/actions/setup-gradle@v3
         with:
           arguments: build -PignoreCheckFailures=true -PgithubUsername=${{ github.actor }} -PgithubPassword=${{ secrets.GITHUB_TOKEN }}
 
