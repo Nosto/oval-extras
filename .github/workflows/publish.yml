@@ -2,9 +2,7 @@ name: Publish to GitHub Packages
 on:
   release:
     types: [created]
-  push:
-    branches:
-      - 'release/**'
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -22,31 +20,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
 
-      - name: Read project name from settings.gradle
-        run: |
-          PROJECT_NAME=$(grep -oP "(?<=rootProject.name = ')[^']+" settings.gradle)
-          echo "PROJECT_NAME=PROJECT_NAME" >> $GITHUB_ENV
-
-      - name: Read project version from gradle.properties
-        run: |
-          VERSION=$(grep "^version=" gradle.properties | cut -d'=' -f2)
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
-
-      - name: Get package version id
-        uses: castlabs/get-package-version-id-action@v2.0
-        with:
-          version: "${{ env.VERSION }}"
-
-      - name: Delete existing package, if any
-        if: ${{ steps.version.outputs.ids != '' }}
-        uses: actions/delete-package-versions@v5
-        with:
-          package-name: ${{ env.PROJECT_NAME }}
-          package-type: maven
-          package-version-ids: ${{ steps.versions.outputs.ids }}
-
       - name: Publish package
         run: ./gradlew publish
         env:
-          VERSION: ${{ env.VERSION }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

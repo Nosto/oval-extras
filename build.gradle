@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'com.nosto'
-version = project.property('version')
+version '0.0.9'
 
 java {
     sourceCompatibility '11'
@@ -49,6 +49,7 @@ publishing {
     publications {
         maven(MavenPublication) {
             from components.java
+
             pom {
                 name = 'Oval Extras'
                 description = 'Oval extras is based on OVal and brings a few more validation constraints on top of it'
