@@ -11,8 +11,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 11
-          distribution: temurin
+          java-version: '11'
+          distribution: 'temurin'
 
       - name: Setup and execute Gradle 'test' task
         uses: gradle/actions/setup-gradle@v3
