@@ -85,11 +85,11 @@ test {
         }
     }
     maxParallelForks = (int) (Runtime.runtime.availableProcessors() / 2 + 1)
-    finalizedBy jacocoTestReport // report is always generated after tests run
+    finalizedBy('jacocoTestReport') // report is always generated after tests run
 }
 
 jacocoTestReport {
-    dependsOn test // tests are required to run before generating the report
+    dependsOn(test) // tests are required to run before generating the report
 }
 
 javadoc {
@@ -97,7 +97,7 @@ javadoc {
 }
 
 tasks.register('sourcesJar', Jar) {
-    dependsOn classes
+    dependsOn(classes)
     archiveClassifier = 'sources'
     from sourceSets.main.allSource
 }
@@ -194,7 +194,7 @@ shadowJar {
 }
 
 build {
-    dependsOn buildZip
+    dependsOn('buildZip')
 }
 
 qodana {
