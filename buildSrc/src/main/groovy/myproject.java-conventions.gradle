@@ -218,9 +218,6 @@ downloadLicenses {
     includeProjectDependencies = true
 }
 
-configurations.implementation.setCanBeResolved(true)
-configurations.api.setCanBeResolved(true)
-
 snyk {
     arguments = '--all-sub-projects --remote-repo-url=Nosto/fortknox --org=nosto'
 }
