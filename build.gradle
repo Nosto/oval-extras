@@ -2,12 +2,12 @@ plugins {
     id 'myproject.java-conventions'
 }
 
-group 'com.nosto'
-version '0.0.9'
+group = 'com.nosto'
+version = '0.0.10-SNAPSHOT'
 
 java {
-    sourceCompatibility '11'
-    targetCompatibility '11'
+    sourceCompatibility = '11'
+    targetCompatibility = '11'
 }
 
 dependencies {
