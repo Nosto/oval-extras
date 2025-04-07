@@ -3,11 +3,11 @@ plugins {
 }
 
 group 'com.nosto'
-version '0.0.9-SNAPSHOT'
+version '0.0.9'
 
 java {
-    sourceCompatibility "11"
-    targetCompatibility "11"
+    sourceCompatibility '11'
+    targetCompatibility '11'
 }
 
 dependencies {
@@ -38,75 +38,61 @@ dependencies {
 publishing {
     repositories {
         maven {
-            name = "github"
-            url = uri("https://maven.pkg.github.com/nosto/oval-extras")
-            credentials(PasswordCredentials)
+            name = 'GitHubPackages'
+            url = uri('https://maven.pkg.github.com/nosto/oval-extras')
+            credentials {
+                username = System.getenv('GITHUB_ACTOR')
+                password = System.getenv('GITHUB_TOKEN')
+            }
         }
     }
     publications {
-        //noinspection GroovyAssignabilityCheck
         maven(MavenPublication) {
-            //noinspection GroovyAssignabilityCheck
             from components.java
 
             pom {
-                //noinspection GroovyAssignabilityCheck
                 name = 'Oval Extras'
-                //noinspection GroovyAssignabilityCheck
-                description = 'A simple library to sanity-check your bean ser-deser'
-                //noinspection GroovyAssignabilityCheck
+                description = 'Oval extras is based on OVal and brings a few more validation constraints on top of it'
                 url = 'https://github.com/nosto/oval-extras'
                 licenses {
                     license {
-                        //noinspection GroovyAssignabilityCheck
                         name = 'The Apache License, Version 2.0'
-                        //noinspection GroovyAssignabilityCheck
                         url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
-                        //noinspection GroovyAssignabilityCheck
                         distribution = 'repo'
                     }
                 }
                 developers {
                     developer {
-                        //noinspection GroovyAssignabilityCheck
                         id = 'olsi-qose'
-                        //noinspection GroovyAssignabilityCheck
                         name = 'Olsi Qose'
-                        //noinspection GroovyAssignabilityCheck
                         email = 'olsi.qose@nosto.com'
                     }
                 }
                 contributors {
                     contributor {
-                        //noinspection GroovyAssignabilityCheck
                         id = 'gary-nosto'
-                        //noinspection GroovyAssignabilityCheck
                         name = 'Gary Madden'
-                        //noinspection GroovyAssignabilityCheck
                         email = 'gary.madden@nosto.com'
                     }
                     contributor {
-                        //noinspection GroovyAssignabilityCheck
                         id = 'mridang'
-                        //noinspection GroovyAssignabilityCheck
                         name = 'Mridang Agarwalla'
-                        //noinspection GroovyAssignabilityCheck
                         email = 'mridang.agarwalla@osto.com'
+                    }
+                    contributor {
+                        id = 'valto23'
+                        name = 'Vladimir Siutkin'
+                        email = 'vladimir.siutkin@osto.com'
                     }
                 }
                 scm {
-                    //noinspection GroovyAssignabilityCheck
                     connection = 'scm:git:git://github.com/nosto/oval-extras.git'
-                    //noinspection GroovyAssignabilityCheck
                     developerConnection = 'scm:git:ssh://github.com/nosto/oval-extras.git'
-                    //noinspection GroovyAssignabilityCheck
                     url = 'https://github.com/nosto/oval-extras'
                 }
                 issueManagement {
-                    //noinspection GroovyAssignabilityCheck
-                    system = "Github"
-                    //noinspection GroovyAssignabilityCheck
-                    url = "https://github.com/nosto/oval-extras/issues"
+                    system = 'Github'
+                    url = 'https://github.com/nosto/oval-extras/issues'
                 }
             }
         }

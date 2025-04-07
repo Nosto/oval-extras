@@ -25,7 +25,7 @@ repositories {
     }
     maven {
         name = "mridang"
-        url = uri("https://maven.pkg.github.com/nosto/beanie")
+        url = uri("https://maven.pkg.github.com/nosto/oval-extras")
         credentials {
             username = project.findProperty("githubUsername") ?: System.getenv("GITHUB_ACTOR")
             password = project.findProperty("githubPassword") ?: System.getenv("GITHUB_TOKEN")
@@ -102,8 +102,8 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 }
 
 java {
-    sourceCompatibility '17'
-    targetCompatibility '17'
+    sourceCompatibility '11'
+    targetCompatibility '11'
     withSourcesJar()
     withJavadocJar()
 }
