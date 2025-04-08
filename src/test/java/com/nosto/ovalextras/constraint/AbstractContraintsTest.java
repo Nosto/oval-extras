@@ -5,7 +5,12 @@
 package com.nosto.ovalextras.constraint;
 
 import net.sf.oval.Check;
+import net.sf.oval.ConstraintViolation;
 import net.sf.oval.Validator;
+
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -28,5 +33,14 @@ public abstract class AbstractContraintsTest {
 
         check.setProfiles((String[]) null);
         assertTrue(check.getProfiles() == null || check.getProfiles().length == 0);
+    }
+
+    protected void assertViolations(List<String> expectedViolationCodes, List<ConstraintViolation> violations) {
+        assertEquals(expectedViolationCodes.size(), violations.size());
+        Set<String> actualErrorCodes = violations.stream()
+                .map(ConstraintViolation::getErrorCode)
+                .collect(Collectors.toUnmodifiableSet());
+
+        expectedViolationCodes.forEach(errorCode -> assertTrue("Violation of " + errorCode + " is expected", actualErrorCodes.contains(errorCode)));
     }
 }

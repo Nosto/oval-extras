@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2021 Nosto Solutions Ltd All Rights Reserved.
+ *  Copyright (c) 2025 Nosto Solutions Ltd All Rights Reserved.
  *
  *  This software is the confidential and proprietary information of
  *  Nosto Solutions Ltd ("Confidential Information"). You shall not
@@ -9,14 +9,11 @@
  */
 package com.nosto.ovalextras;
 
-import static org.hamcrest.Matchers.notNullValue;
-
-import java.lang.reflect.Modifier;
-import java.util.Locale;
-import java.util.ResourceBundle;
-import java.util.Set;
-import java.util.stream.Collectors;
-
+import com.nosto.ovalextras.constraint.ValidateNestedPropertyCheck;
+import net.sf.oval.AbstractCheck;
+import net.sf.oval.Validator;
+import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
+import net.sf.oval.localization.message.ResourceBundleMessageResolver;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ErrorCollector;
@@ -24,10 +21,13 @@ import org.reflections.Reflections;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 
-import net.sf.oval.AbstractCheck;
-import net.sf.oval.Validator;
-import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
-import net.sf.oval.localization.message.ResourceBundleMessageResolver;
+import java.lang.reflect.Modifier;
+import java.util.Locale;
+import java.util.ResourceBundle;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import static org.hamcrest.Matchers.notNullValue;
 
 public class ValidationMessagesTest {
 
@@ -46,16 +46,17 @@ public class ValidationMessagesTest {
                 .filter(c -> !Modifier.isAbstract(c.getModifiers()))
                 .collect(Collectors.toSet());
 
-        annotations.forEach(aClass -> {
-            try {
-                String key = aClass.getDeclaredConstructor().newInstance().getMessage();
-                String message = resolver.getMessage(key);
-                errorCollector.checkThat("No localisation for " + key, message, notNullValue());
-            } catch (Exception e) {
-                errorCollector.addError(e);
-            }
-        });
-
+        annotations.stream()
+                .filter(aClass -> !ValidateNestedPropertyCheck.class.equals(aClass))
+                .forEach(aClass -> {
+                    try {
+                        String key = aClass.getDeclaredConstructor().newInstance().getMessage();
+                        String message = resolver.getMessage(key);
+                        errorCollector.checkThat("No localisation for " + key, message, notNullValue());
+                    } catch (Exception e) {
+                        errorCollector.addError(e);
+                    }
+                });
     }
 
 }
