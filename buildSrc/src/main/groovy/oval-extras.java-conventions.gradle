@@ -4,69 +4,60 @@ plugins {
     id 'maven-publish'
     id 'java-library'
     id 'java-test-fixtures'
-    id "jacoco"
-    id "com.github.johnrengelman.shadow"
+    id 'jacoco'
+    id 'com.gradleup.shadow'
     id 'com.diffplug.spotless'
-    id "com.github.spotbugs"
-    id "net.ltgt.errorprone"
+    id 'com.github.spotbugs'
+    id 'net.ltgt.errorprone'
     id 'net.ltgt.nullaway'
-    id "com.dorongold.task-tree"
+    id 'com.dorongold.task-tree'
     id 'net.idlestate.gradle-duplicate-classes-check'
-    id "org.jetbrains.qodana"
-    //id "org.jetbrains.intellij"
-    id "com.github.hierynomus.license-report"
-    id "io.snyk.gradle.plugin.snykplugin"
+    id 'org.jetbrains.qodana'
+    id 'com.github.hierynomus.license-report'
+    id 'io.snyk.gradle.plugin.snykplugin'
 }
 
 repositories {
     mavenCentral()
     maven {
-        url "https://maven.onehippo.com/maven2/"
-    }
-    maven {
-        name = "mridang"
-        url = uri("https://maven.pkg.github.com/nosto/oval-extras")
-        credentials {
-            username = project.findProperty("githubUsername") ?: System.getenv("GITHUB_ACTOR")
-            password = project.findProperty("githubPassword") ?: System.getenv("GITHUB_TOKEN")
-        }
+        url = 'https://maven.onehippo.com/maven2/'
     }
 }
 
 dependencies {
-    errorprone group: 'com.uber.nullaway', name: 'nullaway', version: '0.9.6'
-    errorprone group: 'com.google.errorprone', name: 'error_prone_core', version: '2.12.1'
-    spotbugsPlugins group: 'com.h3xstream.findsecbugs', name: 'findsecbugs-plugin', version: '1.12.0'
-    //checkstyle group: 'io.spring.nohttp', name: 'nohttp-checkstyle', version: '0.0.10'
+    errorprone group: 'com.uber.nullaway', name: 'nullaway', version: '0.12.6'
+    errorprone group: 'com.google.errorprone', name: 'error_prone_core', version: '2.31.0'
+    spotbugsPlugins group: 'com.h3xstream.findsecbugs', name: 'findsecbugs-plugin', version: '1.13.0'
+    checkstyle group: 'io.spring.nohttp', name: 'nohttp-checkstyle', version: '0.0.11'
 }
 
 // Configuration for the nullaway extension. The rest of the parameters must be
 // specified on the java-compile tasks. The only option that be specified here
 // is the name of the root package to be analysed.
 nullaway {
-    annotatedPackages.add("com.nosto")
+    annotatedPackages.add('com.nosto')
 }
 
 // Configuration for the Jacoco plugin. It seems that it isn't possible to define
 // the output report formats here and those seem to be defined on the individual
 // task level.
-// I'm not sure why the tool version is defined here and it isn't managed as a
-// dependency.
+// The tool version is defined here instead of dependency since JaCoCo is a built-in plugin
+// https://docs.gradle.org/current/userguide/plugin_reference.html#plugin_reference
 jacoco {
-    toolVersion = "0.8.8"
+    toolVersion = '0.8.12'
 }
 
 // We only need the XML report so that the CI tools can parse it. The HTML isn't needed.
 jacocoTestReport {
     reports {
         csv {
-            enabled true
+            required = false
         }
         xml {
-            enabled false
+            required = true
         }
         html {
-            enabled true
+            required = false
         }
     }
 }
@@ -74,36 +65,37 @@ jacocoTestReport {
 test {
     useJUnitPlatform()
     testLogging {
-        events "passed", "skipped", "failed"
+        events 'passed', 'skipped', 'failed'
     }
     reports {
         junitXml {
-            enabled true
+            required = true
         }
         html {
-            enabled true
+            required = true
         }
     }
     maxParallelForks = (int) (Runtime.runtime.availableProcessors() / 2 + 1)
-    finalizedBy jacocoTestReport // report is always generated after tests run
+    finalizedBy('jacocoTestReport') // report is always generated after tests run
 }
 
 jacocoTestReport {
-    dependsOn test // tests are required to run before generating the report
+    dependsOn(test) // tests are required to run before generating the report
 }
 
 javadoc {
     options.addBooleanOption('html5', true)
 }
 
-task sourcesJar(type: Jar, dependsOn: classes) {
-    archiveClassifier.set("sources")
+tasks.register('sourcesJar', Jar) {
+    dependsOn(classes)
+    archiveClassifier = 'sources'
     from sourceSets.main.allSource
 }
 
 java {
-    sourceCompatibility '11'
-    targetCompatibility '11'
+    sourceCompatibility = '11'
+    targetCompatibility = '11'
     withSourcesJar()
     withJavadocJar()
 }
@@ -111,12 +103,9 @@ java {
 // Configuration for the Spotbugs plugin. It seems that it isn't possible to define
 // the output report formats here and those seem to be defined on the individual
 // task level.
-// I'm not sure why the tool version is defined here and it isn't managed as a
-// dependency.
 spotbugs {
-    toolVersion = '4.6.0'
     ignoreFailures = true
-    effort = 'max'
+    effort = com.github.spotbugs.snom.Effort.MAX
     // Exclude all *.scala files as Spotbugs doesn't work too well with Scala.
     excludeFilter = file("$rootDir/gradle/config/spotbugs/exclude.xml")
 }
@@ -125,10 +114,10 @@ spotbugs {
 spotbugsMain {
     reports {
         sarif {
-            enabled true
+            required = true
         }
         xml {
-            enabled true
+            required = true
         }
     }
 }
@@ -137,10 +126,10 @@ spotbugsMain {
 spotbugsTest {
     reports {
         sarif {
-            enabled true
+            required = true
         }
         xml {
-            enabled true
+            required = true
         }
     }
 }
@@ -148,11 +137,11 @@ spotbugsTest {
 // Configuration for the Checkstyle plugin. It seems that it isn't possible to define
 // the output report formats here and those seem to be defined on the individual
 // task level.
-// I'm not sure why the tool version is defined here and it isn't managed as a
-// dependency.
+// The tool version is defined here instead of dependency since Checkstyle is a built-in plugin
+// https://docs.gradle.org/current/userguide/plugin_reference.html#plugin_reference
 checkstyle {
-    toolVersion "10.1"
-    config rootProject.resources.text.fromFile("gradle/config/checkstyle/checkstyle.xml")
+    toolVersion = '10.1'
+    config = rootProject.resources.text.fromFile('gradle/config/checkstyle/checkstyle.xml')
 }
 
 // We only need the XML report so that the CI tools can parse it. The HTML isn't needed
@@ -160,10 +149,10 @@ checkstyle {
 checkstyleMain {
     reports {
         xml {
-            enabled true
+            required = true
         }
         html {
-            enabled false
+            required = false
         }
     }
 }
@@ -172,16 +161,16 @@ checkstyleMain {
 checkstyleTest {
     reports {
         xml {
-            enabled true
+            required = true
         }
         html {
-            enabled false
+            required = false
         }
     }
 }
 
 // Task for building the zip file for upload
-task buildZip(type: Zip) {
+tasks.register('buildZip', Zip) {
     zip64 = true
     archiveBaseName.set(rootProject.name)
     from compileJava
@@ -192,11 +181,11 @@ task buildZip(type: Zip) {
 }
 
 shadowJar {
-    zip64 true
+    zip64 = true
 }
 
 build {
-    dependsOn buildZip
+    dependsOn('buildZip')
 }
 
 qodana {
@@ -219,9 +208,6 @@ downloadLicenses {
     dependencyConfiguration = 'implementation'
     includeProjectDependencies = true
 }
-
-configurations.implementation.setCanBeResolved(true)
-configurations.api.setCanBeResolved(true)
 
 snyk {
     arguments = '--all-sub-projects --remote-repo-url=Nosto/fortknox --org=nosto'
