@@ -35,6 +35,9 @@ public abstract class AbstractContraintsTest {
         assertTrue(check.getProfiles() == null || check.getProfiles().length == 0);
     }
 
+    /**
+     * Checks that given constraint violations correspond to expected.
+     */
     protected void assertViolations(List<String> expectedViolationCodes, List<ConstraintViolation> violations) {
         assertEquals(expectedViolationCodes.size(), violations.size());
         Set<String> actualErrorCodes = violations.stream()

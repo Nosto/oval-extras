@@ -20,14 +20,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.validator.routines.DomainValidator;
 
 /**
- * Utilities for URI handling
+ * Utilities for URI handling.
  */
 public final class URIUtil {
 
     private URIUtil() {}
 
     /**
-     * Extract domain name without the subdomain 'www'
+     * Extract domain name without the subdomain 'www'.
      */
     @Nullable
     public static String getDomainName(String uri) {
