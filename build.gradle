@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'com.nosto'
-version = '0.0.10-SNAPSHOT'
+version = '0.1.0-SNAPSHOT'
 
 java {
     sourceCompatibility = '11'
