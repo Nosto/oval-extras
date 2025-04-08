@@ -1,5 +1,5 @@
 plugins {
-    id 'myproject.java-conventions'
+    id 'oval-extras.java-conventions'
 }
 
 group = 'com.nosto'

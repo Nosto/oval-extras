@@ -13,7 +13,6 @@ plugins {
     id 'com.dorongold.task-tree'
     id 'net.idlestate.gradle-duplicate-classes-check'
     id 'org.jetbrains.qodana'
-    //id 'org.jetbrains.intellij'
     id 'com.github.hierynomus.license-report'
     id 'io.snyk.gradle.plugin.snykplugin'
 }
@@ -23,21 +22,13 @@ repositories {
     maven {
         url = 'https://maven.onehippo.com/maven2/'
     }
-    maven {
-        name = 'mridang'
-        url = uri('https://maven.pkg.github.com/nosto/oval-extras')
-        credentials {
-            username = project.findProperty('githubUsername') ?: System.getenv('GITHUB_ACTOR')
-            password = project.findProperty('githubPassword') ?: System.getenv('GITHUB_TOKEN')
-        }
-    }
 }
 
 dependencies {
     errorprone group: 'com.uber.nullaway', name: 'nullaway', version: '0.12.6'
     errorprone group: 'com.google.errorprone', name: 'error_prone_core', version: '2.31.0'
     spotbugsPlugins group: 'com.h3xstream.findsecbugs', name: 'findsecbugs-plugin', version: '1.13.0'
-    //checkstyle group: 'io.spring.nohttp', name: 'nohttp-checkstyle', version: '0.0.10'
+    checkstyle group: 'io.spring.nohttp', name: 'nohttp-checkstyle', version: '0.0.11'
 }
 
 // Configuration for the nullaway extension. The rest of the parameters must be
@@ -50,8 +41,8 @@ nullaway {
 // Configuration for the Jacoco plugin. It seems that it isn't possible to define
 // the output report formats here and those seem to be defined on the individual
 // task level.
-// I'm not sure why the tool version is defined here and it isn't managed as a
-// dependency.
+// The tool version is defined here instead of dependency since JaCoCo is a built-in plugin
+// https://docs.gradle.org/current/userguide/plugin_reference.html#plugin_reference
 jacoco {
     toolVersion = '0.8.12'
 }
@@ -146,8 +137,8 @@ spotbugsTest {
 // Configuration for the Checkstyle plugin. It seems that it isn't possible to define
 // the output report formats here and those seem to be defined on the individual
 // task level.
-// I'm not sure why the tool version is defined here and it isn't managed as a
-// dependency.
+// The tool version is defined here instead of dependency since Checkstyle is a built-in plugin
+// https://docs.gradle.org/current/userguide/plugin_reference.html#plugin_reference
 checkstyle {
     toolVersion = '10.1'
     config = rootProject.resources.text.fromFile('gradle/config/checkstyle/checkstyle.xml')
