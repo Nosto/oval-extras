@@ -18,6 +18,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
+@SuppressWarnings({"unused", "NullAway"})
 public class ValidateNestedPropertyCheckTest extends AbstractContraintsTest {
 
     @Test
@@ -73,6 +74,7 @@ public class ValidateNestedPropertyCheckTest extends AbstractContraintsTest {
         assertViolations(expectedViolations, validator.validate(mainObj));
     }
 
+    @SuppressWarnings("FieldCanBeLocal")
     private static class MainClass {
         @ValidateNestedProperty
         private final NestedClass nested;
@@ -85,6 +87,7 @@ public class ValidateNestedPropertyCheckTest extends AbstractContraintsTest {
         }
     }
 
+    @SuppressWarnings("FieldCanBeLocal")
     private static class NestedClass {
         @Nullable
         private final String notRequiredStr;
