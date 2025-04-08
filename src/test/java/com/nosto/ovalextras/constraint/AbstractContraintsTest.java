@@ -1,5 +1,6 @@
 /*
  * Copyright 2005-2021 by Sebastian Thomschke and contributors.
+ * Copyright 2025 Nosto Solutions Ltd (modifications).
  * SPDX-License-Identifier: EPL-2.0
  */
 package com.nosto.ovalextras.constraint;
@@ -16,6 +17,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Common logic of validation constraint testing.
+ *
+ * @author Sebastian Thomschke
+ */
 public abstract class AbstractContraintsTest {
     protected final Validator validator = new Validator();
 
