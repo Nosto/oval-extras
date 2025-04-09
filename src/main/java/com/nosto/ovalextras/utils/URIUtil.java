@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018 Nosto Solutions Ltd All Rights Reserved.
+ * Copyright (c) 2025 Nosto Solutions Ltd All Rights Reserved.
  * <p>
  * This software is the confidential and proprietary information of
  * Nosto Solutions Ltd ("Confidential Information"). You shall not
@@ -11,6 +11,7 @@ package com.nosto.ovalextras.utils;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.Objects;
 
 import javax.annotation.Nullable;
@@ -19,15 +20,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.validator.routines.DomainValidator;
 
 /**
- * @author stephenfenech
+ * Utilities for URI handling.
  */
 public final class URIUtil {
 
     private URIUtil() {}
 
     /**
-     * @param uri uri
-     * @return domain name without the subdomain 'www'
+     * Extract domain name without the subdomain 'www'.
      */
     @Nullable
     public static String getDomainName(String uri) {
@@ -39,7 +39,7 @@ public final class URIUtil {
                 uri = "https:" + uri;
             }
             URL theUri = new URL(uri);
-            String host = theUri.getHost().toLowerCase();
+            String host = theUri.getHost().toLowerCase(Locale.ROOT);
             return removeWWWSubDomain(host);
         } catch (MalformedURLException e) {
             return null;
