@@ -20,7 +20,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
-public class ValidateNestedPropertyCheck extends AbstractAnnotationCheck<ValidateNestedProperty> {
+public class ValidNestedPropertyCheck extends AbstractAnnotationCheck<ValidNestedProperty> {
 
     @Override
     @SuppressWarnings("java:S3516")

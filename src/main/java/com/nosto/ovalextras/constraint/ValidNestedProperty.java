@@ -21,6 +21,6 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target( { ElementType.FIELD, ElementType.PARAMETER, ElementType.METHOD, ElementType.TYPE })
-@Constraint(checkWith = ValidateNestedPropertyCheck.class)
-public @interface ValidateNestedProperty {
+@Constraint(checkWith = ValidNestedPropertyCheck.class)
+public @interface ValidNestedProperty {
 }

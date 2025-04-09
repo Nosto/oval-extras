@@ -9,7 +9,7 @@
  ******************************************************************************/
 package com.nosto.ovalextras;
 
-import com.nosto.ovalextras.constraint.ValidateNestedPropertyCheck;
+import com.nosto.ovalextras.constraint.ValidNestedPropertyCheck;
 import net.sf.oval.AbstractCheck;
 import net.sf.oval.Validator;
 import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
@@ -50,7 +50,7 @@ public class ValidationMessagesTest {
 
         annotations.stream()
                 // Nested property check is filtered out since it only delegates the checks
-                .filter(aClass -> !ValidateNestedPropertyCheck.class.equals(aClass))
+                .filter(aClass -> !ValidNestedPropertyCheck.class.equals(aClass))
                 .forEach(aClass -> {
                     try {
                         String key = aClass.getDeclaredConstructor().newInstance().getMessage();

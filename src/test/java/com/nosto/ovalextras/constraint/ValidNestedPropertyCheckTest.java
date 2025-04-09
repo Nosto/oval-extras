@@ -18,11 +18,11 @@ import java.util.List;
 import static org.junit.Assert.assertTrue;
 
 @SuppressWarnings({"unused", "NullAway"})
-public class ValidateNestedPropertyCheckTest extends AbstractContraintsTest {
+public class ValidNestedPropertyCheckTest extends AbstractContraintsTest {
 
     @Test
     public void validateNestedProperty() {
-        ValidateNestedPropertyCheck check = new ValidateNestedPropertyCheck();
+        ValidNestedPropertyCheck check = new ValidNestedPropertyCheck();
         super.testCheck(check);
 
         NestedClass nestedObj = new NestedClass(null, "Valid String", List.of("one", "two"), List.of("1", "2"));
@@ -76,9 +76,9 @@ public class ValidateNestedPropertyCheckTest extends AbstractContraintsTest {
 
     @SuppressWarnings("FieldCanBeLocal")
     private static class MainClass {
-        @ValidateNestedProperty
+        @ValidNestedProperty
         private final NestedClass nested;
-        @ValidateNestedProperty
+        @ValidNestedProperty
         private final List<NestedClass> nestedList;
 
         public MainClass(NestedClass nested, List<NestedClass> nestedList) {
