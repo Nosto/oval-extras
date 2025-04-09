@@ -22,16 +22,14 @@ import java.util.Objects;
 
 public class ValidateNestedPropertyCheck extends AbstractAnnotationCheck<ValidateNestedProperty> {
 
-    private static final long serialVersionUID = 1L;
-
     @Override
     @SuppressWarnings("java:S3516")
     public boolean isSatisfied(final Object validatedObject, final Object value, final ValidationCycle cycle) throws OValException {
         if (value != null) {
             Validator validator = Objects.requireNonNull(cycle).getValidator();
 
+            // Value is a collection
             if (value instanceof Collection<?>) {
-                // valueToValidate is a collection
                 Collection<?> col = (Collection<?>) value;
                 for (Object object : col) {
                     List<ConstraintViolation> violations = validator.validate(object);
@@ -41,8 +39,8 @@ public class ValidateNestedPropertyCheck extends AbstractAnnotationCheck<Validat
                 return true;
             }
 
+            // Value is an array
             if (value.getClass().isArray()) {
-                // valueToValidate is an array
                 int length = Array.getLength(value);
                 for (int i = 0; i < length; i++) {
                     Object o = Array.get(value, i);
@@ -53,7 +51,7 @@ public class ValidateNestedPropertyCheck extends AbstractAnnotationCheck<Validat
                 return true;
             }
 
-            // valueToValidate is other object
+            // Value is other object
             List<ConstraintViolation> violations = validator.validate(value);
             addViolations(cycle, violations);
         }
