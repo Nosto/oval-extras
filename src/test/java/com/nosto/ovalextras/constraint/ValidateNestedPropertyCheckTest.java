@@ -39,7 +39,8 @@ public class ValidateNestedPropertyCheckTest extends AbstractContraintsTest {
                 List.of(
                         "com.nosto.ovalextras.constraint.Required",
                         "com.nosto.ovalextras.constraint.Contains",
-                        "net.sf.oval.constraint.Size"), mainObj,
+                        "net.sf.oval.constraint.Size"),
+                mainObj,
                 nestedObj
         );
     }

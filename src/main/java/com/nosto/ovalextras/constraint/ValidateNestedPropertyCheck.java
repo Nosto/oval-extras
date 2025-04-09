@@ -28,34 +28,30 @@ public class ValidateNestedPropertyCheck extends AbstractAnnotationCheck<Validat
         if (value != null) {
             Validator validator = Objects.requireNonNull(cycle).getValidator();
 
-            // Value is a collection
             if (value instanceof Collection<?>) {
+                // Value is a collection
                 Collection<?> col = (Collection<?>) value;
                 for (Object object : col) {
                     List<ConstraintViolation> violations = validator.validate(object);
                     addViolations(cycle, violations);
                 }
 
-                return true;
-            }
-
-            // Value is an array
-            if (value.getClass().isArray()) {
+            } else if (value.getClass().isArray()) {
+                // Value is an array
                 int length = Array.getLength(value);
                 for (int i = 0; i < length; i++) {
                     Object o = Array.get(value, i);
                     List<ConstraintViolation> violations = validator.validate(o);
                     addViolations(cycle, violations);
                 }
-
-                return true;
+            } else {
+                // Value is other object
+                List<ConstraintViolation> violations = validator.validate(value);
+                addViolations(cycle, violations);
             }
-
-            // Value is other object
-            List<ConstraintViolation> violations = validator.validate(value);
-            addViolations(cycle, violations);
         }
 
+        // Always return true for the current (main) object since the check is targeted at nested one
         return true;
     }
 
