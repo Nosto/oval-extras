@@ -20,6 +20,8 @@ import net.sf.oval.ValidationCycle;
 import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
 import net.sf.oval.exception.OValException;
 
+import java.util.Locale;
+
 public class EUVatCheck extends AbstractAnnotationCheck<EUVat> {
 
     @Override
@@ -63,7 +65,7 @@ public class EUVatCheck extends AbstractAnnotationCheck<EUVat> {
             if (country == null) {
                 return false;
             }
-            return VAT_CODES_FOR_EU_COUNTRIES.contains(country.toUpperCase());
+            return VAT_CODES_FOR_EU_COUNTRIES.contains(country.toUpperCase(Locale.ROOT));
         }
     }
 

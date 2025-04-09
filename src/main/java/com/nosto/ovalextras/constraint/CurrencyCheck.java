@@ -15,11 +15,13 @@ import net.sf.oval.ValidationCycle;
 import net.sf.oval.configuration.annotation.AbstractAnnotationCheck;
 import net.sf.oval.exception.OValException;
 
+import java.util.Locale;
+
 public class CurrencyCheck extends AbstractAnnotationCheck<Currency> {
 
     public static boolean isValidCurrency(Object value) {
         try {
-            java.util.Currency.getInstance(value.toString().trim().toUpperCase());
+            java.util.Currency.getInstance(value.toString().trim().toUpperCase(Locale.ROOT));
             return true;
         } catch (IllegalArgumentException e) {
             return false;

@@ -28,7 +28,7 @@ public class CountryCheck extends AbstractAnnotationCheck<Country> {
             return true;
         } else {
             Set<String> countries = Sets.newHashSet(Locale.getISOCountries());
-            return countries.contains(value.toString().toUpperCase());
+            return countries.contains(value.toString().toUpperCase(Locale.ROOT));
         }
     }
 }
