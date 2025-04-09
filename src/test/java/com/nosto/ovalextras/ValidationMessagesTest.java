@@ -34,9 +34,11 @@ public class ValidationMessagesTest {
     @Rule
     public ErrorCollector errorCollector = new ErrorCollector();
 
+    /**
+     * Checks that every constraint has a message in case of violation.
+     */
     @Test
-    public void testMessageHandling() {
-
+    public void constraintsHaveViolationMessages() {
         final ResourceBundleMessageResolver resolver = (ResourceBundleMessageResolver) Validator.getMessageResolver();
         resolver.addMessageBundle(ResourceBundle.getBundle("com/nosto/ovalextras/MessagesResolverTest", new Locale("en")));
 
@@ -47,12 +49,13 @@ public class ValidationMessagesTest {
                 .collect(Collectors.toSet());
 
         annotations.stream()
+                // Nested property check is filtered out since it only delegates the checks
                 .filter(aClass -> !ValidateNestedPropertyCheck.class.equals(aClass))
                 .forEach(aClass -> {
                     try {
                         String key = aClass.getDeclaredConstructor().newInstance().getMessage();
                         String message = resolver.getMessage(key);
-                        errorCollector.checkThat("No localisation for " + key, message, notNullValue());
+                        errorCollector.checkThat("No violation message for " + key, message, notNullValue());
                     } catch (Exception e) {
                         errorCollector.addError(e);
                     }
