@@ -16,8 +16,9 @@ jobs:
 
       - name: Setup and execute Gradle 'test' task
         uses: gradle/actions/setup-gradle@342bf5a6b8680a437c5d946c41fa90a74ae0ed45 #v5.0.0
-        with:
-          arguments: build -PignoreCheckFailures=true -PgithubUsername=${{ github.actor }} -PgithubPassword=${{ secrets.GITHUB_TOKEN }}
+        
+      - name: Run Tests
+        run: ./gradlew build -PignoreCheckFailures=true -PgithubUsername=${{ github.actor }} -PgithubPassword=${{ secrets.GITHUB_TOKEN }}
 
       - name: Archive build output
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f #v6.0.0
