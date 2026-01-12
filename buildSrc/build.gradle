@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    implementation group: 'com.gradleup.shadow', name: 'shadow-gradle-plugin', version: '8.3.6'
+    implementation group: 'com.gradleup.shadow', name: 'shadow-gradle-plugin', version: '9.3.1'
     implementation group: 'com.github.alisiikh', name: 'gradle-scalastyle-plugin', version: '3.4.1'
     implementation group: 'com.diffplug.spotless', name: 'spotless-plugin-gradle', version: '6.5.0'
     implementation group: 'com.github.spotbugs.snom', name: 'spotbugs-gradle-plugin', version: '6.1.7'
